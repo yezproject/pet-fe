@@ -1,20 +1,18 @@
-import { Button, Space } from "antd";
+import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
+import { publicRoutes } from "~/routes";
+
 function App() {
   return (
-    <>
-      <div>
-        <h1 className="text-3xl font-bold text-red-500 underline">
-          Pet home page!
-        </h1>
-        <Space wrap>
-          <Button type="primary">Primary Button</Button>
-          <Button>Default Button</Button>
-          <Button type="dashed">Dashed Button</Button>
-          <Button type="text">Text Button</Button>
-          <Button type="link">Link Button</Button>
-        </Space>
+    <Router>
+      <div className="App">
+        <Routes>
+          {publicRoutes.map((route, index) => {
+            const Page = route.component;
+            return <Route path={route.path} element={<Page />} key={index} />;
+          })}
+        </Routes>
       </div>
-    </>
+    </Router>
   );
 }
 
