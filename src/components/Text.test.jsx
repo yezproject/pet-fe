@@ -1,12 +1,11 @@
-// eslint-disable-next-line no-unused-vars
-import React from "react";
-import { describe, it, expect } from "vitest";
-import { render, screen } from "@testing-library/react";
-import Text from "./Text";
+import { render, screen } from '@testing-library/react';
+import { describe, expect, it } from 'vitest';
 
-describe("App", () => {
-  it("Vite to be in document", () => {
+import Text from './Text';
+
+describe('App', () => {
+  it('Vite to be in document', () => {
     render(<Text />);
-    expect(screen.getByText("Vite")).toBeInTheDocument();
+    expect(screen.getByText('Vite')).toBeInTheDocument();
   });
 });
