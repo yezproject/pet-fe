@@ -7,12 +7,16 @@ export default defineConfig({
   plugins: [react()],
   resolve: {
     alias: {
-      '~': fileURLToPath(new URL('./src', import.meta.url)),
+      '@': fileURLToPath(new URL('./src', import.meta.url)),
     },
   },
   test: {
     globals: true,
     environment: 'happy-dom',
     setupFiles: './tests/setup.js',
+    coverage: {
+      include: ['src/components/**'],
+      reporter: ['text', 'json-summary', 'json'],
+    }
   },
 });
