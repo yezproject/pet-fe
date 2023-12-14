@@ -1,4 +1,4 @@
-import { Routes } from './routers.jsx';
+import { Routes } from './routes.jsx';
 
 const App = () => {
   return <div className='app-da-suadoi'>{Routes()}</div>;
