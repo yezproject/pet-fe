@@ -1,8 +1,8 @@
 import { useRoutes } from 'react-router-dom';
 
-import Home from '~/pages/Home';
-import NotFound from '~/pages/NotFound';
-import Transactions from '~/pages/Transactions';
+import Home from '~/pages/Home/index.jsx';
+import NotFound from '~/pages/NotFound/index.jsx';
+import Transactions from '~/pages/Transactions/index.jsx';
 
 const Routes = () => {
   return useRoutes([
