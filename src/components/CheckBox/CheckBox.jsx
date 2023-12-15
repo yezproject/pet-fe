@@ -6,7 +6,7 @@ const CheckBox = ({ label, onChange }) => {
 
   const handleCheckboxChange = () => {
     setChecked(!isChecked);
-    onChange(!isChecked); // Gửi giá trị mới của checkbox lên cha
+    onChange(!isChecked);
   };
   return (
     <label className='flex items-center gap-x-[10px] cursor-pointer'>
