@@ -1,6 +1,6 @@
-import Home from '~/pages/Home';
-import NotFound from '~/pages/NotFound';
-import Transactions from '~/pages/Transactions';
+import Home from '@/pages/Home';
+import NotFound from '@/pages/NotFound';
+import Transactions from '@/pages/Transactions';
 
 const publicRoutes = [
   { path: '/', component: Home },
