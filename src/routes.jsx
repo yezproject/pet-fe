@@ -1,8 +1,9 @@
 import { useRoutes } from 'react-router-dom';
 
-import Home from '~/pages/Home/index.jsx';
-import NotFound from '~/pages/NotFound/index.jsx';
-import Transactions from '~/pages/Transactions/index.jsx';
+import Home from '@/pages/Home';
+import Login from '@/pages/Login/Login.jsx';
+import NotFound from '@/pages/NotFound';
+import Transactions from '@/pages/Transactions';
 
 const Routes = () => {
   return useRoutes([
@@ -20,7 +21,10 @@ const Routes = () => {
         },
       ],
     },
-
+    {
+      path: '/login',
+      element: <Login />,
+    },
     {
       path: '*',
       element: <NotFound />,

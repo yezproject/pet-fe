@@ -1,7 +1,7 @@
-import { Routes } from '~/routes/index.jsx';
+import { Routes } from '@/routes';
 
 const App = () => {
-  return <div className='app-da-suadoi'>{Routes()}</div>;
+  return <div className='relative w-screen h-screen top-0 left-0'>{Routes()}</div>;
 };
 
 export default App;

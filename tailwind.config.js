@@ -11,8 +11,11 @@ export default {
     colors: {
       darkColor: '#000000',
       whiteColor: '#FFFFFF',
-      grayColor: '#747A80',
+      darkGrey: '#747A80',
+      grayColor: '#EBF0F0',
       primaryColor: '#0052FF',
+      outlineColor: '#CFDBD5B2',
+      pinkColor: '#F20089',
     },
     fontFamily: {
       inter: ['Inter', 'sans-serif'],
