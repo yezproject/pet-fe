@@ -25,3 +25,13 @@
   color: #000000;
   line-height: 18px;
 }
+
+.input-search {
+  width: 307px;
+  height: 40px;
+  padding: 10px 13px;
+
+  .ant-input-prefix {
+    margin-right: 11px;
+  }
+}
