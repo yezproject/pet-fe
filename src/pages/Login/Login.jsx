@@ -1,5 +1,5 @@
 import { useForm } from 'react-hook-form';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import { yupResolver } from '@hookform/resolvers/yup';
 
 import AuthTitle from '@/components/AuthTitle/AuthTitle.jsx';
@@ -15,6 +15,7 @@ import ic_qr from '@/images/icons/ic_qr-code.svg';
 import Auth from '@/layout/Auth/index.jsx';
 
 const Login = () => {
+  const navigate = useNavigate();
   const {
     handleSubmit,
     register,
@@ -25,6 +26,9 @@ const Login = () => {
   });
   const onSubmit = (data) => {
     console.log(data);
+  };
+  const handleNavigate = () => {
+    navigate('/login-qr');
   };
   return (
     <Auth>
@@ -73,7 +77,7 @@ const Login = () => {
                 or
               </div>
             </div>
-            <ButtonWhite content='Login with QR code' icon={ic_qr} iconPosition='left' />
+            <ButtonWhite content='Login with QR code' icon={ic_qr} iconPosition='left' onClick={handleNavigate} />
           </div>
         </form>
       </div>
