@@ -12,11 +12,11 @@ const ButtonWhite = ({ type, content, icon, iconPosition, onClick }) => {
     >
       <div className='flex items-center justify-center'>
         {icon && iconPosition === 'left' && (
-          <img className='h-[18px] w-[18px] object-cover mr-2' src={icon} alt={`icon_${content}`} />
+          <img className='h-[18px] w-[18px] object-contain mr-2' src={icon} alt={`icon_${content}`} />
         )}
         {content}
         {icon && iconPosition === 'right' && (
-          <img className='h-[18px] w-[18px] object-cover mr-2' src={icon} alt={`icon_${content}`} />
+          <img className='h-[18px] w-[18px] object-contain mr-2' src={icon} alt={`icon_${content}`} />
         )}
       </div>
     </button>
