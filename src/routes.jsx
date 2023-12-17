@@ -1,5 +1,6 @@
 import { useRoutes } from 'react-router-dom';
 
+import ForgotPassword from '@/pages/ForgotPassword/ForgotPassword.jsx';
 import Home from '@/pages/Home';
 import Join from '@/pages/Join/Join.jsx';
 import Login from '@/pages/Login/Login.jsx';
@@ -25,6 +26,10 @@ const Routes = () => {
     {
       path: '/login',
       element: <Login />,
+    },
+    {
+      path: '/forgot-password',
+      element: <ForgotPassword />,
     },
     {
       path: '/join',
