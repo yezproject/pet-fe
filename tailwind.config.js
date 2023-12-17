@@ -4,8 +4,8 @@ export default {
   theme: {
     extend: {
       backgroundImage: {
-        'auth-background': 'url("./src/images/bg-auth.png")',
-        'ic-logo': 'url("./src/images/icons/ic_logo.svg")',
+        'auth-background': 'url("./src/assets/images/bg-auth.png")',
+        'ic-logo': 'url("./src/assets/images/icons/ic_logo.svg")',
       },
     },
     colors: {
