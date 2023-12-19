@@ -12,6 +12,7 @@ module.exports = {
   settings: { react: { version: '18.2' } },
   plugins: ['react-refresh', 'simple-import-sort'],
   rules: {
+    'react/prop-types': 'off',
     quotes: ['error', 'single'],
     'jsx-quotes': ['error', 'prefer-single'],
     'no-unused-vars': 'error',

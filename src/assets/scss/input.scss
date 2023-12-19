@@ -1,0 +1,27 @@
+.ant-input-affix-wrapper {
+  padding: 22px 20px;
+  align-items: center;
+
+  .ant-input-suffix {
+    display: block;
+    height: 18px;
+    width: 18px;
+  }
+}
+
+.ant-input {
+  padding: 22px 20px;
+  border-radius: 8px;
+  line-height: 21px;
+  font-family: 'Inter', sans-serif;
+  font-size: 14px;
+  color: #000000;
+}
+
+.ant-typography {
+  font-family: 'Inter', sans-serif;
+  font-size: 12px;
+  font-weight: 700;
+  color: #000000;
+  line-height: 18px;
+}

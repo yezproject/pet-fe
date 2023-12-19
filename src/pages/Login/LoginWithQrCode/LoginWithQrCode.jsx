@@ -1,11 +1,11 @@
 import { useNavigate } from 'react-router-dom';
 import { QRCode } from 'antd';
 
-import AuthTitle from '@/components/AuthTitle/AuthTitle.jsx';
-import ButtonWhite from '@/components/button/ButtonWhite.jsx';
-import NavigatorAuthContent from '@/components/NavigatorAuthContent/NavigatorAuthContent.jsx';
-import ic_logo from '@/images/icons/ic_logo.svg';
-import ic_phone from '@/images/icons/ic_phone.svg';
+import ic_logo from '@/assets/images/icons/ic_logo.svg';
+import ic_phone from '@/assets/images/icons/ic_phone.svg';
+import AuthTitle from '@/components/base/AuthTitle/AuthTitle.jsx';
+import ButtonWhite from '@/components/base/button/ButtonWhite.jsx';
+import NavigatorAuthContent from '@/components/base/NavigatorAuthContent/NavigatorAuthContent.jsx';
 import Auth from '@/layout/Auth/index.jsx';
 
 const LoginWithQrCode = () => {

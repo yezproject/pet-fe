@@ -3,16 +3,16 @@ import { useForm } from 'react-hook-form';
 import { yupResolver } from '@hookform/resolvers/yup';
 import { message } from 'antd';
 
-import AuthTitle from '@/components/AuthTitle/AuthTitle.jsx';
-import Button from '@/components/button/Button.jsx';
-import CheckBox from '@/components/CheckBox/CheckBox.jsx';
-import DropDownWithLabel from '@/components/DropDownWithLabel/DropDownWithLabel.jsx';
-import InputWithLabel from '@/components/input/InputWithLabel.jsx';
-import PasswordWithLabel from '@/components/input/PasswordWithLabel.jsx';
-import NavigatorAuthContent from '@/components/NavigatorAuthContent/NavigatorAuthContent.jsx';
+import ic_mail from '@/assets/images/icons/ic_mail.svg';
+import AuthTitle from '@/components/base/AuthTitle/AuthTitle.jsx';
+import Button from '@/components/base/button/Button.jsx';
+import CheckBox from '@/components/base/CheckBox/CheckBox.jsx';
+import DropDownWithLabel from '@/components/base/DropDownWithLabel/DropDownWithLabel.jsx';
+import InputWithLabel from '@/components/base/input/InputWithLabel.jsx';
+import PasswordWithLabel from '@/components/base/input/PasswordWithLabel.jsx';
+import NavigatorAuthContent from '@/components/base/NavigatorAuthContent/NavigatorAuthContent.jsx';
 import { joinValidator } from '@/contains/auth-validator-config.js';
 import { options } from '@/contains/registration-options';
-import ic_mail from '@/images/icons/ic_mail.svg';
 import Auth from '@/layout/Auth/index.jsx';
 
 const Join = () => {
