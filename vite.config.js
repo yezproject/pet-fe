@@ -17,6 +17,6 @@ export default defineConfig({
     coverage: {
       include: ['src/components/**'],
       reporter: ['text', 'json-summary', 'json'],
-    }
+    },
   },
 });
