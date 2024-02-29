@@ -2,15 +2,15 @@ import PropTypes from 'prop-types';
 
 const DropDownWithLabel = ({ label, id, name, options, register, errors }) => {
   return (
-    <div className='flex flex-col gap-y-[12px]'>
-      <label className='text-darkColor text-xs leading-[18px] font-bold font-inter' htmlFor={id}>
+    <div className="flex flex-col gap-y-[12px]">
+      <label className="text-darkColor text-xs leading-[18px] font-bold font-inter" htmlFor={id}>
         {label}
       </label>
       <div>
-        <div className='flex items-center w-full px-5 py-[22px] border-grayColor rounded-lg border-[1px] overflow-hidden'>
+        <div className="flex items-center w-full px-5 py-[22px] border-grayColor rounded-lg border-[1px] overflow-hidden">
           <select
             id={id}
-            className='outline-none w-full h-[21px] text-darkColor text-sm leading-[21px] font-normal font-inter'
+            className="outline-none w-full h-[21px] text-darkColor text-sm leading-[21px] font-normal font-inter"
             {...register}
           >
             {options.map((option) => (
@@ -21,7 +21,7 @@ const DropDownWithLabel = ({ label, id, name, options, register, errors }) => {
           </select>
         </div>
         {errors[name] && (
-          <span className='text-sm leading-[21px] text-pinkColor font-inter'>{errors[name].message}</span>
+          <span className="text-sm leading-[21px] text-pinkColor font-inter">{errors[name].message}</span>
         )}
       </div>
     </div>

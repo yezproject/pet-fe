@@ -30,7 +30,7 @@ const joinValidator = yup.object().shape({
     .min(6, 'Password must be at least 6 characters')
     .max(30, 'Password must not exceed 30 characters')
     .matches(/^[a-zA-Z0-9$@!%*?&#^-_. +]+$/, 'Password without accents'),
-  region: yup.string().required('Region is required').notOneOf([''], 'Please select a valid region'),
+  fullName: yup.string().required('Full name is required'),
 });
 
 export { loginValidator, joinValidator, forgotPasswordValidator };

@@ -25,26 +25,26 @@ const ForgotPassword = () => {
 
   return (
     <Auth>
-      <div className='mb-12 mt-[104px]'>
+      <div className="mb-12 mt-[104px]">
         <AuthTitle
-          content='Forgot password?'
-          description='Enter your email below, you will receive an email with instructions on how to reset your password in a few minutes. You can also set a new password if you’ve never set one before.'
+          content="Forgot password?"
+          description="Enter your email below, you will receive an email with instructions on how to reset your password in a few minutes. You can also set a new password if you’ve never set one before."
         />
       </div>
-      <div className='flex flex-col flex-1 justify-between text-2xl text-orange-950'>
+      <div className="flex flex-col flex-1 justify-between text-2xl text-orange-950">
         <form onSubmit={handleSubmit(onSubmit)}>
-          <div className='flex flex-col gap-y-7 '>
-            <div className='flex flex-col gap-y-[18px] min-w-[437px]'>
+          <div className="flex flex-col gap-y-7 ">
+            <div className="flex flex-col gap-y-[18px] min-w-[437px]">
               <Controller
-                name='email'
+                name="email"
                 control={control}
                 render={({ field }) => (
                   <InputWithLabel
-                    label='Email'
-                    id='email'
-                    placeholder='Enter your email'
-                    type='email'
-                    name='email'
+                    label="Email"
+                    id="email"
+                    placeholder="Enter your email"
+                    type="email"
+                    name="email"
                     suffix={<Icon src={ic_mail} />}
                     errors={errors}
                     register={{
@@ -56,13 +56,13 @@ const ForgotPassword = () => {
                 )}
               />
             </div>
-            <Button type='primary' htmlType='submit'>
+            <Button type="primary" htmlType="submit">
               Sign in
             </Button>
           </div>
         </form>
       </div>
-      <NavigatorAuthContent content='Don’t have an account?' contentLink='create an account' to='/join' />
+      <NavigatorAuthContent content="Don’t have an account?" contentLink="create an account" to="/join" />
     </Auth>
   );
 };

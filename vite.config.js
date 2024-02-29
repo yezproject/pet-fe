@@ -19,4 +19,13 @@ export default defineConfig({
       reporter: ['text', 'json-summary', 'json'],
     },
   },
+  server: {
+    proxy: {
+      '/api': {
+        target: 'http://localhost:8080',
+        changeOrigin: true,
+        rewrite: (path) => path.replace(/^\/api/, ''),
+      },
+    },
+  },
 });

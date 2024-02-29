@@ -10,11 +10,12 @@ module.exports = {
   ignorePatterns: ['dist', '.eslintrc.cjs'],
   parserOptions: { ecmaVersion: 'latest', sourceType: 'module' },
   settings: { react: { version: '18.2' } },
-  plugins: ['react-refresh', 'simple-import-sort'],
+  plugins: ['react-refresh', 'simple-import-sort', 'prettier'],
   rules: {
+    'prettier/prettier': 'error',
     'react/prop-types': 'off',
     quotes: ['error', 'single'],
-    'jsx-quotes': ['error', 'prefer-single'],
+    'jsx-quotes': ['error', 'prefer-double'],
     'no-unused-vars': 'error',
     'react-refresh/only-export-components': ['warn', { allowConstantExport: true }],
     'simple-import-sort/imports': [

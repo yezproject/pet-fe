@@ -40,8 +40,8 @@ const Transactions = () => {
   const columns = [
     {
       title: (
-        <div className='flex items-center'>
-          Date <img src={ic_unfold_more} className='block ml-2 h-[18px] w-[18px] object-contain' alt='icon_fold' />
+        <div className="flex items-center">
+          Date <img src={ic_unfold_more} className="block ml-2 h-[18px] w-[18px] object-contain" alt="icon_fold" />
         </div>
       ),
       dataIndex: 'date',
@@ -51,9 +51,9 @@ const Transactions = () => {
     },
     {
       title: (
-        <div className='flex items-center'>
+        <div className="flex items-center">
           Payment To{' '}
-          <img src={ic_unfold_more} className='block ml-2 h-[18px] w-[18px] object-contain' alt='icon_fold' />
+          <img src={ic_unfold_more} className="block ml-2 h-[18px] w-[18px] object-contain" alt="icon_fold" />
         </div>
       ),
       dataIndex: 'paymentTo',
@@ -63,8 +63,8 @@ const Transactions = () => {
     },
     {
       title: (
-        <div className='flex items-center'>
-          Type <img src={ic_unfold_more} className='block ml-2 h-[18px] w-[18px] object-contain' alt='icon_fold' />
+        <div className="flex items-center">
+          Type <img src={ic_unfold_more} className="block ml-2 h-[18px] w-[18px] object-contain" alt="icon_fold" />
         </div>
       ),
       dataIndex: 'type',
@@ -74,8 +74,8 @@ const Transactions = () => {
     },
     {
       title: (
-        <div className='flex items-center'>
-          Fee <img src={ic_unfold_more} className='block ml-2 h-[18px] w-[18px] object-contain' alt='icon_fold' />
+        <div className="flex items-center">
+          Fee <img src={ic_unfold_more} className="block ml-2 h-[18px] w-[18px] object-contain" alt="icon_fold" />
         </div>
       ),
       dataIndex: 'fee',
@@ -85,8 +85,8 @@ const Transactions = () => {
     },
     {
       title: (
-        <div className='flex items-center'>
-          Amount <img src={ic_unfold_more} className='block ml-2 h-[18px] w-[18px] object-contain' alt='icon_fold' />
+        <div className="flex items-center">
+          Amount <img src={ic_unfold_more} className="block ml-2 h-[18px] w-[18px] object-contain" alt="icon_fold" />
         </div>
       ),
       dataIndex: 'amount',
@@ -97,7 +97,7 @@ const Transactions = () => {
   ];
 
   return (
-    <div className='w-full h-full'>
+    <div className="w-full h-full">
       <TransactionInfo />
       <TransactionMenu />
       <TransactionTable transactions={transactions} columns={columns} />

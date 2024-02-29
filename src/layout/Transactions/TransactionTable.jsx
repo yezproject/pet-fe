@@ -3,7 +3,7 @@ import PropTypes from 'prop-types';
 
 const TransactionTable = ({ transactions, columns }) => {
   return (
-    <div className='px-[70px] table-custom'>
+    <div className="px-[70px] table-custom">
       <Table
         dataSource={transactions}
         columns={columns}

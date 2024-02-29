@@ -7,16 +7,16 @@ const ButtonWhite = ({ type, content, icon, iconPosition, onClick }) => {
   return (
     <button
       type={type}
-      className=' w-full py-4 rounded-lg border border-outlineColor text-[14px] font-inter font-bold leading-[21px] text-darkColor  hover:text-primaryColor transition duration-300 ease-linear'
+      className=" w-full py-4 rounded-lg border border-outlineColor text-[14px] font-inter font-bold leading-[21px] text-darkColor  hover:text-primaryColor transition duration-300 ease-linear"
       onClick={handleClick}
     >
-      <div className='flex items-center justify-center'>
+      <div className="flex items-center justify-center">
         {icon && iconPosition === 'left' && (
-          <img className='h-[18px] w-[18px] object-contain mr-2' src={icon} alt={`icon_${content}`} />
+          <img className="h-[18px] w-[18px] object-contain mr-2" src={icon} alt={`icon_${content}`} />
         )}
         {content}
         {icon && iconPosition === 'right' && (
-          <img className='h-[18px] w-[18px] object-contain mr-2' src={icon} alt={`icon_${content}`} />
+          <img className="h-[18px] w-[18px] object-contain mr-2" src={icon} alt={`icon_${content}`} />
         )}
       </div>
     </button>

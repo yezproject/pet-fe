@@ -59,13 +59,13 @@ const Main = () => {
   return (
     <Layout hasSider>
       <div>
-        <div className='w-full pt-[20px] pl-[32px] bg-[#ebf0f0]'>
-          <img src={ic_logo} alt='icon' className='w-[44px] h-[44px] cursor-pointer' />
+        <div className="w-full pt-[20px] pl-[32px] bg-[#ebf0f0]">
+          <img src={ic_logo} alt="icon" className="w-[44px] h-[44px] cursor-pointer" />
         </div>
         <Menu defaultSelectedKeys={['3']} items={items} onClick={onClick} />
-        <div className='flex items-center w-full h-[48px] pb-[21px] pl-[30px] bg-[#ebf0f0]'>
-          <img src={ic_settings} alt='icon' className='w-[22px] h-[22px] cursor-pointer' />
-          <span className='h-[21px] ml-[14px] font-bold text-[#747A80] cursor-pointer'>Profile Settings</span>
+        <div className="flex items-center w-full h-[48px] pb-[21px] pl-[30px] bg-[#ebf0f0]">
+          <img src={ic_settings} alt="icon" className="w-[22px] h-[22px] cursor-pointer" />
+          <span className="h-[21px] ml-[14px] font-bold text-[#747A80] cursor-pointer">Profile Settings</span>
         </div>
       </div>
       <Layout>

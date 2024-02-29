@@ -15,7 +15,7 @@ const Routes = () => {
   return useRoutes([
     {
       path: '/',
-      element: <Navigate to='/main/transactions' />,
+      element: <Navigate to="/main/transactions" />,
     },
     {
       path: '/login',
