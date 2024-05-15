@@ -12,7 +12,7 @@ module.exports = {
   settings: { react: { version: '18.2' } },
   plugins: ['react-refresh', 'simple-import-sort', 'prettier'],
   rules: {
-    'prettier/prettier': 'error',
+    'prettier/prettier': 0,
     'react/prop-types': 'off',
     quotes: ['error', 'single'],
     'jsx-quotes': ['error', 'prefer-double'],

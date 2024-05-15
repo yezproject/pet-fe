@@ -8,7 +8,7 @@ import NotFound from '@/pages/NotFound';
 
 import Accounts from './layout/Accounts/Accounts';
 import Dashboard from './layout/Dashboard/Dashboard';
-import Main from './layout/Main/Main';
+import Main from '@/layout/main/Main';
 import Transactions from './layout/Transactions/Transaction';
 
 const Routes = () => {
