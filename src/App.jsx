@@ -1,17 +1,12 @@
-import { Box, CssBaseline, CssVarsProvider } from "@mui/joy";
-import Header from "@/layout/header/Header";
-import Main from "@/layout/main/Main";
-import Sidebar from "@/layout/sidebar/Sidebar.jsx";
+import { Route, Routes } from 'react-router-dom';
+import Login from '@/components/login/Login.jsx';
+import Main from '@/layout/main/Main.jsx';
 
 export default function App() {
     return (
-        <CssVarsProvider disableTransitionOnChange>
-            <CssBaseline />
-            <Box sx={{ display: "flex", minHeight: "100dvh" }}>
-                <Header />
-                <Sidebar />
-                <Main />
-            </Box>
-        </CssVarsProvider>
+        <Routes>
+            <Route path="/" element={<Login />} />
+            <Route path="/main" element={<Main />} />
+        </Routes>
     );
 }

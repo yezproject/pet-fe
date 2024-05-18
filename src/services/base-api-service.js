@@ -1,7 +1,7 @@
 import axios from 'axios';
 import jsesc from 'jsesc';
 
-import { clearToken, getToken } from '@/common/local-storage';
+import { clearToken, getToken } from '@/common/storage/local-storage.js';
 import API_URL from '@/services/config.js';
 
 const ACCEPTED_RESPONSE_STATUS = [409, 400];

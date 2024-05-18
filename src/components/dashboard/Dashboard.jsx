@@ -2,9 +2,9 @@ import { Box, Breadcrumbs, Link, Typography, Button } from "@mui/joy";
 import ChevronRightRoundedIcon from "@mui/icons-material/ChevronRightRounded";
 import HomeRoundedIcon from "@mui/icons-material/HomeRounded";
 import DownloadRoundedIcon from "@mui/icons-material/DownloadRounded";
-import BaseTable from "./base/BaseTable.jsx";
+import BaseTable from "@/common/base/BaseTable.jsx";
 
-export default function PageOne() {
+export default function Dashboard() {
     return (
         <Box
             component="main"
