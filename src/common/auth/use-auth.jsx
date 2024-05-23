@@ -1,6 +1,6 @@
 import { createContext, useContext, useMemo } from "react";
 import { useNavigate } from "react-router-dom";
-import { clearToken, getToken, setToken } from '@/common/storage/local-storage.js';
+import { clearToken, clearUser, getToken, getUser, setToken, setUser } from '@/common/storage/local-storage.js';
 
 const AuthContext = createContext();
 
@@ -16,11 +16,21 @@ export const AuthProvider = ({ children }) => {
         navigate("/", { replace: true });
     };
 
+    const cacheUser = async (data, remember) => {
+        if(!remember) {
+            clearUser();
+        } else {
+            if(getUser()) clearUser();
+            setUser(data);
+        }
+    }
+
     const value = useMemo(
         () => ({
             token: getToken(),
             login,
-            logout
+            logout,
+            cacheUser
         }),
         [getToken()]
     );
