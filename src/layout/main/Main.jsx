@@ -13,11 +13,15 @@ import DownloadRoundedIcon from "@mui/icons-material/DownloadRounded"
 import Header from '@/layout/header/Header.jsx';
 import Sidebar from '@/layout/sidebar/Sidebar.jsx';
 import BaseTable from '@/common/base/BaseTable.jsx';
-import { Route, Routes } from 'react-router-dom';
-import Login from '@/components/login/Login.jsx';
+import { Navigate, Route, Routes } from 'react-router-dom';
 import Profile from '@/components/profile/Profile.jsx';
+import { getToken } from '@/common/storage/local-storage.js';
 
 export default function Main() {
+    if (!getToken()) {
+        return <Navigate to="/" />;
+    }
+
     return (
         <CssVarsProvider disableTransitionOnChange>
             <CssBaseline />

@@ -1,40 +1,38 @@
-import * as React from "react"
-import GlobalStyles from "@mui/joy/GlobalStyles"
-import Avatar from "@mui/joy/Avatar"
-import Box from "@mui/joy/Box"
-import Button from "@mui/joy/Button"
-import Card from "@mui/joy/Card"
-import Chip from "@mui/joy/Chip"
-import Divider from "@mui/joy/Divider"
-import IconButton from "@mui/joy/IconButton"
-import Input from "@mui/joy/Input"
-import LinearProgress from "@mui/joy/LinearProgress"
-import List from "@mui/joy/List"
-import ListItem from "@mui/joy/ListItem"
-import ListItemButton, { listItemButtonClasses } from "@mui/joy/ListItemButton"
-import ListItemContent from "@mui/joy/ListItemContent"
-import Typography from "@mui/joy/Typography"
-import Sheet from "@mui/joy/Sheet"
-import Stack from "@mui/joy/Stack"
-import SearchRoundedIcon from "@mui/icons-material/SearchRounded"
-import HomeRoundedIcon from "@mui/icons-material/HomeRounded"
-import DashboardRoundedIcon from "@mui/icons-material/DashboardRounded"
-import ShoppingCartRoundedIcon from "@mui/icons-material/ShoppingCartRounded"
-import AssignmentRoundedIcon from "@mui/icons-material/AssignmentRounded"
-import QuestionAnswerRoundedIcon from "@mui/icons-material/QuestionAnswerRounded"
-import GroupRoundedIcon from "@mui/icons-material/GroupRounded"
-import SupportRoundedIcon from "@mui/icons-material/SupportRounded"
-import SettingsRoundedIcon from "@mui/icons-material/SettingsRounded"
-import CloseRoundedIcon from "@mui/icons-material/CloseRounded"
-import LogoutRoundedIcon from "@mui/icons-material/LogoutRounded"
-import BrightnessAutoRoundedIcon from "@mui/icons-material/BrightnessAutoRounded"
-import KeyboardArrowDownIcon from "@mui/icons-material/KeyboardArrowDown"
+import * as React from 'react';
+import GlobalStyles from '@mui/joy/GlobalStyles';
+import Avatar from '@mui/joy/Avatar';
+import Box from '@mui/joy/Box';
+import Button from '@mui/joy/Button';
+import Card from '@mui/joy/Card';
+import Chip from '@mui/joy/Chip';
+import Divider from '@mui/joy/Divider';
+import IconButton from '@mui/joy/IconButton';
+import Input from '@mui/joy/Input';
+import LinearProgress from '@mui/joy/LinearProgress';
+import List from '@mui/joy/List';
+import ListItem from '@mui/joy/ListItem';
+import ListItemButton, { listItemButtonClasses } from '@mui/joy/ListItemButton';
+import ListItemContent from '@mui/joy/ListItemContent';
+import Typography from '@mui/joy/Typography';
+import Sheet from '@mui/joy/Sheet';
+import Stack from '@mui/joy/Stack';
+import SearchRoundedIcon from '@mui/icons-material/SearchRounded';
+import HomeRoundedIcon from '@mui/icons-material/HomeRounded';
+import DashboardRoundedIcon from '@mui/icons-material/DashboardRounded';
+import ShoppingCartRoundedIcon from '@mui/icons-material/ShoppingCartRounded';
+import AssignmentRoundedIcon from '@mui/icons-material/AssignmentRounded';
+import QuestionAnswerRoundedIcon from '@mui/icons-material/QuestionAnswerRounded';
+import GroupRoundedIcon from '@mui/icons-material/GroupRounded';
+import SupportRoundedIcon from '@mui/icons-material/SupportRounded';
+import SettingsRoundedIcon from '@mui/icons-material/SettingsRounded';
+import CloseRoundedIcon from '@mui/icons-material/CloseRounded';
+import LogoutRoundedIcon from '@mui/icons-material/LogoutRounded';
+import BrightnessAutoRoundedIcon from '@mui/icons-material/BrightnessAutoRounded';
+import KeyboardArrowDownIcon from '@mui/icons-material/KeyboardArrowDown';
 
-import { closeSidebar } from '@/contains/logic-sidebar.js'
-import { useColorScheme } from '@mui/joy/styles';
-import DarkModeRoundedIcon from '@mui/icons-material/DarkModeRounded.js';
-import LightModeRoundedIcon from '@mui/icons-material/LightModeRounded.js';
-import { useNavigate } from 'react-router-dom';
+import { closeSidebar } from '@/contains/logic-sidebar.js';
+import BaseDarkMod from '@/common/base/BaseDarkMod.jsx';
+import { useAuth } from '@/common/auth/use-auth.jsx';
 
 function Toggler({ defaultExpanded = false, renderToggle, children }) {
     const [open, setOpen] = React.useState(defaultExpanded)
@@ -57,37 +55,12 @@ function Toggler({ defaultExpanded = false, renderToggle, children }) {
     )
 }
 
-function ColorSchemeToggleSideBar(props) {
-    const { onClick, ...other } = props;
-    const { mode, setMode } = useColorScheme();
-    const [mounted, setMounted] = React.useState(false);
-
-    React.useEffect(() => setMounted(true), []);
-
-    return (
-        <IconButton
-            aria-label="toggle light/dark mode"
-            size="sm"
-            variant="outlined"
-            disabled={!mounted}
-            onClick={event => {
-                setMode(mode === 'light' ? 'dark' : 'light');
-                onClick?.(event);
-            }}
-            {...other}
-        >
-            {mode === 'light' ? <DarkModeRoundedIcon /> : <LightModeRoundedIcon />}
-        </IconButton>
-    );
-}
-
 export default function Sidebar() {
-    let navigate = useNavigate();
+    const { logout } = useAuth();
 
-    function onChangeRoute(value) {
-        navigate(value);
-    }
-
+    const onClickLogout = () => {
+        logout();
+    };
 
     return (
         <Sheet
@@ -147,7 +120,7 @@ export default function Sidebar() {
                     <BrightnessAutoRoundedIcon />
                 </IconButton>
                 <Typography level="title-lg">Acme Co.</Typography>
-                <ColorSchemeToggleSideBar sx={{ ml: "auto" }} />
+                <BaseDarkMod sx={{ ml: "auto" }} />
             </Box>
             <Input
                 size="sm"
@@ -347,7 +320,7 @@ export default function Sidebar() {
                     <Typography level="title-sm">Siriwat K.</Typography>
                     <Typography level="body-xs">siriwatk@test.com</Typography>
                 </Box>
-                <IconButton size="sm" variant="plain" color="neutral" onClick={() => onChangeRoute('/')}>
+                <IconButton size="sm" variant="plain" color="neutral" onClick={() => onClickLogout()}>
                     <LogoutRoundedIcon/>
                 </IconButton>
             </Box>
