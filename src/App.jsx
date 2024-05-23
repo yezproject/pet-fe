@@ -1,12 +1,16 @@
 import { Route, Routes } from 'react-router-dom';
-import Login from '@/components/login/Login.jsx';
-import Main from '@/layout/main/Main.jsx';
+import React, { Suspense } from 'react';
+
+const Main = React.lazy(() => import('@/layout/main/Main.jsx'));
+const Login = React.lazy(() => import('@/components/login/Login.jsx'));
 
 export default function App() {
     return (
-        <Routes>
-            <Route path="/" element={<Login />} />
-            <Route path="/main" element={<Main />} />
-        </Routes>
+        <Suspense fallback={<div>Loading...</div>}>
+            <Routes>
+                <Route path="/" element={<Login />} />
+                <Route path="/main/*" element={<Main />} />
+            </Routes>
+        </Suspense>
     );
 }

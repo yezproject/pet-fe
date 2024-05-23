@@ -1,5 +1,5 @@
 import * as React from 'react';
-import { CssVarsProvider, useColorScheme } from '@mui/joy/styles';
+import { CssVarsProvider } from '@mui/joy/styles';
 import GlobalStyles from '@mui/joy/GlobalStyles';
 import CssBaseline from '@mui/joy/CssBaseline';
 import Box from '@mui/joy/Box';
@@ -13,42 +13,34 @@ import Link from '@mui/joy/Link';
 import Input from '@mui/joy/Input';
 import Typography from '@mui/joy/Typography';
 import Stack from '@mui/joy/Stack';
-import DarkModeRoundedIcon from '@mui/icons-material/DarkModeRounded';
-import LightModeRoundedIcon from '@mui/icons-material/LightModeRounded';
 import BadgeRoundedIcon from '@mui/icons-material/BadgeRounded';
 import GoogleIcon from '../../common/icon/GoogleIcon';
-import { useNavigate } from 'react-router-dom';
-
-function ColorSchemeToggle(props) {
-    const { onClick, ...other } = props;
-    const { mode, setMode } = useColorScheme();
-    const [mounted, setMounted] = React.useState(false);
-
-    React.useEffect(() => setMounted(true), []);
-
-    return (
-        <IconButton
-            aria-label="toggle light/dark mode"
-            size="sm"
-            variant="outlined"
-            disabled={!mounted}
-            onClick={event => {
-                setMode(mode === 'light' ? 'dark' : 'light');
-                onClick?.(event);
-            }}
-            {...other}
-        >
-            {mode === 'light' ? <DarkModeRoundedIcon /> : <LightModeRoundedIcon />}
-        </IconButton>
-    );
-}
+import BaseDarkMod from '@/common/base/BaseDarkMod.jsx';
+import { signIn } from '@/services/join-service.js';
+import { useAuth } from '@/common/auth/use-auth.jsx';
+import { getToken } from '@/common/storage/local-storage.js';
+import { Navigate } from 'react-router-dom';
 
 export default function Login() {
-    let navigate = useNavigate();
+    const { login } = useAuth();
 
-    function onLogin() {
-        navigate("/main")
+    if (getToken()) {
+        return <Navigate to="/main" />;
     }
+
+    const onLogin = async (event) => {
+        event.preventDefault();
+        const formElements = event.currentTarget.elements;
+        const formData = {
+            email: formElements.email.value,
+            password: formElements.password.value,
+            persistent: formElements.persistent.checked,
+        };
+        const { data, status } = await signIn(formData);
+        if (status === 200) {
+            await login(data.token);
+        }
+    };
 
     return (
         <CssVarsProvider defaultMode="dark" disableTransitionOnChange>
@@ -61,70 +53,62 @@ export default function Login() {
                     },
                 }}
             />
-            <Box
-                sx={theme => ({
-                    width: { xs: '100%', md: '50vw' },
-                    transition: 'width var(--Transition-duration)',
-                    transitionDelay: 'calc(var(--Transition-duration) + 0.1s)',
-                    position: 'relative',
-                    zIndex: 1,
+            <Box sx={theme => ({
+                width: { xs: '100%', md: '50vw' },
+                transition: 'width var(--Transition-duration)',
+                transitionDelay: 'calc(var(--Transition-duration) + 0.1s)',
+                position: 'relative',
+                zIndex: 1,
+                display: 'flex',
+                justifyContent: 'flex-end',
+                backdropFilter: 'blur(12px)',
+                backgroundColor: 'rgba(255 255 255 / 0.2)',
+                [theme.getColorSchemeSelector('dark')]: {
+                    backgroundColor: 'rgba(19 19 24 / 0.4)',
+                },
+            })}>
+                <Box sx={{
                     display: 'flex',
-                    justifyContent: 'flex-end',
-                    backdropFilter: 'blur(12px)',
-                    backgroundColor: 'rgba(255 255 255 / 0.2)',
-                    [theme.getColorSchemeSelector('dark')]: {
-                        backgroundColor: 'rgba(19 19 24 / 0.4)',
-                    },
-                })}
-            >
-                <Box
-                    sx={{
-                        display: 'flex',
-                        flexDirection: 'column',
-                        minHeight: '100dvh',
-                        width: '100%',
-                        px: 2,
-                    }}
-                >
-                    <Box
-                        component="header"
-                        sx={{
-                            py: 3,
-                            display: 'flex',
-                            justifyContent: 'space-between',
-                        }}
-                    >
+                    flexDirection: 'column',
+                    minHeight: '100dvh',
+                    width: '100%',
+                    px: 2,
+                }}>
+                    <Box component="header"
+                         sx={{
+                             py: 3,
+                             display: 'flex',
+                             justifyContent: 'space-between',
+                         }}>
                         <Box sx={{ gap: 2, display: 'flex', alignItems: 'center' }}>
                             <IconButton variant="soft" color="primary" size="sm">
                                 <BadgeRoundedIcon />
                             </IconButton>
                             <Typography level="title-lg">Company logo</Typography>
                         </Box>
-                        <ColorSchemeToggle />
+                        <BaseDarkMod />
                     </Box>
-                    <Box
-                        component="main"
-                        sx={{
-                            my: 'auto',
-                            py: 2,
-                            pb: 5,
-                            display: 'flex',
-                            flexDirection: 'column',
-                            gap: 2,
-                            width: 400,
-                            maxWidth: '100%',
-                            mx: 'auto',
-                            borderRadius: 'sm',
-                            '& form': {
-                                display: 'flex',
-                                flexDirection: 'column',
-                                gap: 2,
-                            },
-                            [`& .MuiFormLabel-asterisk`]: {
-                                visibility: 'hidden',
-                            },
-                        }}
-                    >
+                    <Box component="main"
+                         sx={{
+                             my: 'auto',
+                             py: 2,
+                             pb: 5,
+                             display: 'flex',
+                             flexDirection: 'column',
+                             gap: 2,
+                             width: 400,
+                             maxWidth: '100%',
+                             mx: 'auto',
+                             borderRadius: 'sm',
+                             '& form': {
+                                 display: 'flex',
+                                 flexDirection: 'column',
+                                 gap: 2,
+                             },
+                             [`& .MuiFormLabel-asterisk`]: {
+                                 visibility: 'hidden',
+                             },
+                         }}>
                         <Stack gap={4} sx={{ mb: 2 }}>
                             <Stack gap={1}>
                                 <Typography component="h1" level="h3">
@@ -137,12 +121,10 @@ export default function Login() {
                                     </Link>
                                 </Typography>
                             </Stack>
-                            <Button
-                                variant="soft"
-                                color="neutral"
-                                fullWidth
-                                startDecorator={<GoogleIcon />}
-                            >
+                            <Button variant="soft"
+                                    color="neutral"
+                                    fullWidth
+                                    startDecorator={<GoogleIcon />}>
                                 Continue with Google
                             </Button>
                         </Stack>
@@ -156,18 +138,7 @@ export default function Login() {
                             or
                         </Divider>
                         <Stack gap={4} sx={{ mt: 2 }}>
-                            <form
-                                onSubmit={event => {
-                                    event.preventDefault();
-                                    const formElements = event.currentTarget.elements;
-                                    const data = {
-                                        email: formElements.email.value,
-                                        password: formElements.password.value,
-                                        persistent: formElements.persistent.checked,
-                                    };
-                                    alert(JSON.stringify(data, null, 2));
-                                }}
-                            >
+                            <form onSubmit={event => onLogin(event)}>
                                 <FormControl required>
                                     <FormLabel>Email</FormLabel>
                                     <Input type="email" name="email" />
@@ -177,19 +148,17 @@ export default function Login() {
                                     <Input type="password" name="password" />
                                 </FormControl>
                                 <Stack gap={4} sx={{ mt: 2 }}>
-                                    <Box
-                                        sx={{
-                                            display: 'flex',
-                                            justifyContent: 'space-between',
-                                            alignItems: 'center',
-                                        }}
-                                    >
+                                    <Box sx={{
+                                        display: 'flex',
+                                        justifyContent: 'space-between',
+                                        alignItems: 'center',
+                                    }}>
                                         <Checkbox size="sm" label="Remember me" name="persistent" />
                                         <Link level="title-sm" href="#replace-with-a-link">
                                             Forgot your password?
                                         </Link>
                                     </Box>
-                                    <Button type="submit" fullWidth onClick={() => onLogin()}>
+                                    <Button type="submit">
                                         Sign in
                                     </Button>
                                 </Stack>
