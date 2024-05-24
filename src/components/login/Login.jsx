@@ -18,11 +18,17 @@ import GoogleIcon from '../../common/icon/GoogleIcon';
 import BaseDarkMod from '@/common/base/BaseDarkMod.jsx';
 import { signIn } from '@/services/join-service.js';
 import { useAuth } from '@/common/auth/use-auth.jsx';
-import { getToken } from '@/common/storage/local-storage.js';
+import { getToken, getUser } from '@/common/storage/local-storage.js';
 import { Navigate } from 'react-router-dom';
+import { useEffect, useState } from 'react';
 
 export default function Login() {
-    const { login } = useAuth();
+    const { login, cacheUser } = useAuth();
+    const [getErrorUser, setErrorUser] = useState(false);
+    const [getErrorPassword, setErrorPassword] = useState(false);
+    const [getRememberMe, setRememberMe] = useState(false);
+    const [getCacheUser, setCacheUser] = useState('');
+    const [getCachePassword, setCachePassword] = useState('');
 
     if (getToken()) {
         return <Navigate to="/main" />;
@@ -34,13 +40,35 @@ export default function Login() {
         const formData = {
             email: formElements.email.value,
             password: formElements.password.value,
-            persistent: formElements.persistent.checked,
         };
         const { data, status } = await signIn(formData);
         if (status === 200) {
-            await login(data.token);
+            await Promise.all([login(data.token),  cacheUser(formData, getRememberMe)]);
+        } else {
+            setErrorUser(data === 'USER_NOT_FOUND');
+            setErrorPassword(data === 'INVALID_PASSWORD');
         }
     };
+
+    const onRememberMe = async (event) => {
+        setRememberMe(event.target.checked);
+    };
+
+    const onChangeUser = (event) => {
+        setCacheUser(event.target.value);
+    };
+
+    const onChangePassword = (event) => {
+        setCachePassword(event.target.value);
+    };
+
+    useEffect(() => {
+        const rememberUser = getUser();
+        if (rememberUser) {
+            setCacheUser(rememberUser.email);
+            setCachePassword(rememberUser.password);
+        }
+    }, []);
 
     return (
         <CssVarsProvider defaultMode="dark" disableTransitionOnChange>
@@ -139,22 +167,25 @@ export default function Login() {
                         </Divider>
                         <Stack gap={4} sx={{ mt: 2 }}>
                             <form onSubmit={event => onLogin(event)}>
-                                <FormControl required>
+                                <FormControl required error={getErrorUser}>
                                     <FormLabel>Email</FormLabel>
-                                    <Input type="email" name="email" />
+                                    <Input type="email" name="email" value={getCacheUser}
+                                           onChange={event => onChangeUser(event)} />
                                 </FormControl>
-                                <FormControl required>
+                                <FormControl required error={getErrorPassword}>
                                     <FormLabel>Password</FormLabel>
-                                    <Input type="password" name="password" />
+                                    <Input type="password" name="password" value={getCachePassword}
+                                           onChange={event => onChangePassword(event)} />
                                 </FormControl>
                                 <Stack gap={4} sx={{ mt: 2 }}>
                                     <Box sx={{
                                         display: 'flex',
                                         justifyContent: 'space-between',
                                         alignItems: 'center',
-                                    }}>
+                                    }}
+                                         onClick={event => onRememberMe(event)}>
                                         <Checkbox size="sm" label="Remember me" name="persistent" />
-                                        <Link level="title-sm" href="#replace-with-a-link">
+                                        <Link level="title-sm">
                                             Forgot your password?
                                         </Link>
                                     </Box>
