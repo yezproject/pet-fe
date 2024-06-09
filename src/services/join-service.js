@@ -1,15 +1,11 @@
 import HTTP from '@/services/base-api-service';
 
 export async function signIn(params) {
-  return await HTTP.post('public/sign_in', params);
+    return await HTTP.post('public/sign_in', params);
 }
 
 export function signUp(params) {
-  return HTTP.post('public/sign_up', {
-      fullName: 'admin',
-      email: 'duc0911199873@gmail.com',
-      password: '123456'
-  });
+    return HTTP.post('public/sign_up', params);
 }
 
 export function getTransactions() {

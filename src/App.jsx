@@ -8,7 +8,7 @@ export default function App() {
     return (
         <Suspense fallback={<div>Loading...</div>}>
             <Routes>
-                <Route path="/" element={<Login/>}/>
+                <Route path="/*" element={<Login/>}/>
                 <Route path="/main/*" element={<Main/>}/>
             </Routes>
         </Suspense>
