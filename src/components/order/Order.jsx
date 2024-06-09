@@ -5,15 +5,18 @@ import Link from '@mui/joy/Link';
 import HomeRoundedIcon from '@mui/icons-material/HomeRounded.js';
 import Typography from '@mui/joy/Typography';
 import Button from '@mui/joy/Button';
-import DownloadRoundedIcon from '@mui/icons-material/DownloadRounded.js';
 import * as React from 'react';
-import { useEffect, useState } from 'react';
-import { getTransactions } from '@/services/join-service.js';
+import {useEffect, useState} from 'react';
+import {getTransactions} from '@/services/join-service.js';
+import {AddBox} from "@mui/icons-material";
+import BaseModal from "@/common/base/modal/BaseModal.jsx";
+import AddTransactionsModal from "@/components/order/AddTransactionsModal.jsx";
 
 const BaseTable = React.lazy(() => import('@/common/base/table/BaseTable.jsx'));
 
 export default function Order() {
     const [transactions, setTransactions] = useState([]);
+    const [openModal, setOpenModal] = useState(false);
 
     useEffect(() => {
         getTransactions().then(data => {
@@ -83,14 +86,17 @@ export default function Order() {
             <Typography level="h2" component="h1">
                 Orders
             </Typography>
-            <Button
-                color="primary"
-                startDecorator={<DownloadRoundedIcon/>}
-                size="sm"
-            >
-                Download PDF
+            <Button color="primary"
+                    startDecorator={<AddBox/>}
+                    size="sm"
+                    onClick={() => setOpenModal(true)}>
+                Add transactions
             </Button>
         </Box>
         <BaseTable rows={transactions}/>
+        <BaseModal open={openModal}
+                   body={<AddTransactionsModal/>}
+                   title={'Add transaction'}
+                   setOpen={() => setOpenModal(false)}/>
     </Box>;
 }

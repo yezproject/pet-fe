@@ -10,8 +10,8 @@ import Input from '@mui/joy/Input';
 import Stack from '@mui/joy/Stack';
 import {signIn} from '@/services/join-service.js';
 import {useAuth} from '@/common/auth/use-auth.jsx';
-import {getToken, getUser} from '@/common/storage/local-storage.js';
-import {Navigate, useNavigate} from 'react-router-dom';
+import {getUser} from '@/common/storage/local-storage.js';
+import {useNavigate} from 'react-router-dom';
 import Typography from "@mui/joy/Typography";
 import GoogleIcon from "@/common/icon/GoogleIcon.jsx";
 import Divider from "@mui/joy/Divider";
@@ -24,10 +24,6 @@ export default function SignIn() {
     const [getRememberMe, setRememberMe] = useState(false);
     const [getCacheUser, setCacheUser] = useState('');
     const [getCachePassword, setCachePassword] = useState('');
-
-    if (getToken()) {
-        return <Navigate to="/main"/>;
-    }
 
     const onLogin = async (event) => {
         event.preventDefault();
