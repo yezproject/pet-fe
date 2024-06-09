@@ -73,18 +73,16 @@ export default function BaseTable({rows, isCheckbox, isRowMenu, isPagination}) {
     return (
         <Fragment>
             <BaseTableFilters/>
-            <Sheet
-                className="OrderTableContainer"
-                variant="outlined"
-                sx={{
-                    display: {xs: 'none', sm: 'initial'},
-                    width: '100%',
-                    borderRadius: 'sm',
-                    flexShrink: 1,
-                    overflow: 'auto',
-                    minHeight: 0,
-                }}
-            >
+            <Sheet className="OrderTableContainer"
+                   variant="outlined"
+                   sx={{
+                       display: {xs: 'none', sm: 'initial'},
+                       width: '100%',
+                       borderRadius: 'sm',
+                       flexShrink: 1,
+                       overflow: 'auto',
+                       minHeight: 0,
+                   }}>
                 <Table
                     aria-labelledby="tableTitle"
                     stickyHeader
@@ -95,8 +93,7 @@ export default function BaseTable({rows, isCheckbox, isRowMenu, isPagination}) {
                         '--TableRow-hoverBackground': 'var(--joy-palette-background-level1)',
                         '--TableCell-paddingY': '4px',
                         '--TableCell-paddingX': '8px',
-                    }}
-                >
+                    }}>
                     <thead>
                     <tr>
                         {isCheckbox && <th style={{width: 48, textAlign: 'center', padding: '12px 6px'}}>
@@ -116,8 +113,7 @@ export default function BaseTable({rows, isCheckbox, isRowMenu, isPagination}) {
                                         ? 'primary'
                                         : undefined
                                 }
-                                sx={{verticalAlign: 'text-bottom'}}
-                            />
+                                sx={{verticalAlign: 'text-bottom'}}/>
                         </th>}
                         <th style={{width: 100, padding: '12px 6px'}}>
                             <Link underline="none"
