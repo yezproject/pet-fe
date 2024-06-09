@@ -6,37 +6,32 @@ import HomeRoundedIcon from '@mui/icons-material/HomeRounded.js';
 import Typography from '@mui/joy/Typography';
 import Button from '@mui/joy/Button';
 import DownloadRoundedIcon from '@mui/icons-material/DownloadRounded.js';
-import BaseTable from '@/common/base/BaseTable.jsx';
 import * as React from 'react';
-import { useCallback, useEffect, useRef, useState } from 'react';
+import { useEffect, useState } from 'react';
 import { getTransactions } from '@/services/join-service.js';
 
-export default function Order() {
-    const [transaction, setTransaction] = useState({});
-    const hasCalledApi = useRef(false);
-    const fetchData = useCallback(async () => {
-        const data = await getTransactions();
-        setTransaction(data)
-    },[]);
+const BaseTable = React.lazy(() => import('@/common/base/table/BaseTable.jsx'));
 
-    useEffect( () => {
-        if (!hasCalledApi.current) {
-            fetchData().then(r => {});
-            hasCalledApi.current = true;
-        }
-    }, [fetchData]);
+export default function Order() {
+    const [transactions, setTransactions] = useState([]);
+
+    useEffect(() => {
+        getTransactions().then(data => {
+            setTransactions(data.data);
+        });
+    }, [])
 
     return <Box
         component="main"
         className="MainContent"
         sx={{
-            px: { xs: 2, md: 6 },
+            px: {xs: 2, md: 6},
             pt: {
                 xs: 'calc(12px + var(--Header-height))',
                 sm: 'calc(12px + var(--Header-height))',
                 md: 3,
             },
-            pb: { xs: 2, sm: 2, md: 3 },
+            pb: {xs: 2, sm: 2, md: 3},
             flex: 1,
             display: 'flex',
             flexDirection: 'column',
@@ -45,12 +40,12 @@ export default function Order() {
             gap: 1,
         }}
     >
-        <Box sx={{ display: 'flex', alignItems: 'center' }}>
+        <Box sx={{display: 'flex', alignItems: 'center'}}>
             <Breadcrumbs
                 size="sm"
                 aria-label="breadcrumbs"
-                separator={<ChevronRightRoundedIcon fontSize="sm" />}
-                sx={{ pl: 0 }}
+                separator={<ChevronRightRoundedIcon fontSize="sm"/>}
+                sx={{pl: 0}}
             >
                 <Link
                     underline="none"
@@ -58,7 +53,7 @@ export default function Order() {
                     href="#some-link"
                     aria-label="Home"
                 >
-                    <HomeRoundedIcon />
+                    <HomeRoundedIcon/>
                 </Link>
                 <Link
                     underline="hover"
@@ -79,8 +74,8 @@ export default function Order() {
                 display: 'flex',
                 mb: 1,
                 gap: 1,
-                flexDirection: { xs: 'column', sm: 'row' },
-                alignItems: { xs: 'start', sm: 'center' },
+                flexDirection: {xs: 'column', sm: 'row'},
+                alignItems: {xs: 'start', sm: 'center'},
                 flexWrap: 'wrap',
                 justifyContent: 'space-between',
             }}
@@ -90,12 +85,12 @@ export default function Order() {
             </Typography>
             <Button
                 color="primary"
-                startDecorator={<DownloadRoundedIcon />}
+                startDecorator={<DownloadRoundedIcon/>}
                 size="sm"
             >
                 Download PDF
             </Button>
         </Box>
-        <BaseTable />
+        <BaseTable rows={transactions}/>
     </Box>;
 }

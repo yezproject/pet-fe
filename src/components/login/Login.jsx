@@ -1,5 +1,6 @@
 import * as React from 'react';
-import { CssVarsProvider } from '@mui/joy/styles';
+import {useEffect, useState} from 'react';
+import {CssVarsProvider} from '@mui/joy/styles';
 import GlobalStyles from '@mui/joy/GlobalStyles';
 import CssBaseline from '@mui/joy/CssBaseline';
 import Box from '@mui/joy/Box';
@@ -16,24 +17,20 @@ import Stack from '@mui/joy/Stack';
 import BadgeRoundedIcon from '@mui/icons-material/BadgeRounded';
 import GoogleIcon from '../../common/icon/GoogleIcon';
 import BaseDarkMod from '@/common/base/BaseDarkMod.jsx';
-import { signIn } from '@/services/join-service.js';
-import { useAuth } from '@/common/auth/use-auth.jsx';
-import { getToken, getUser } from '@/common/storage/local-storage.js';
-import { Navigate } from 'react-router-dom';
-import { useEffect, useState } from 'react';
+import {signIn} from '@/services/join-service.js';
+import {useAuth} from '@/common/auth/use-auth.jsx';
+import {getToken, getUser} from '@/common/storage/local-storage.js';
+import {Navigate} from 'react-router-dom';
 
 export default function Login() {
-    const { login, cacheUser } = useAuth();
+    const {login, cacheUser} = useAuth();
     const [getErrorUser, setErrorUser] = useState(false);
     const [getErrorPassword, setErrorPassword] = useState(false);
     const [getRememberMe, setRememberMe] = useState(false);
     const [getCacheUser, setCacheUser] = useState('');
     const [getCachePassword, setCachePassword] = useState('');
-    const [getCacheRemember, setCacheRemember] = useState(false);
 
-    if (getToken()) {
-        return <Navigate to="/main" />;
-    }
+    if (getToken()) return <Navigate to="/main"/>;
 
     const onLogin = async (event) => {
         event.preventDefault();
@@ -42,9 +39,9 @@ export default function Login() {
             email: formElements.email.value,
             password: formElements.password.value,
         };
-        const { data, status } = await signIn(formData);
+        const {data, status} = await signIn(formData);
         if (status === 200) {
-            await Promise.all([login(data.token),  cacheUser(formData, getRememberMe)]);
+            await Promise.all([login(data.token), cacheUser(formData, getRememberMe)]);
         } else {
             setErrorUser(data === 'USER_NOT_FOUND');
             setErrorPassword(data === 'INVALID_PASSWORD');
@@ -68,13 +65,12 @@ export default function Login() {
         if (rememberUser) {
             setCacheUser(rememberUser.email);
             setCachePassword(rememberUser.password);
-            setCachePassword(rememberUser.password);
         }
     }, []);
 
     return (
         <CssVarsProvider defaultMode="dark" disableTransitionOnChange>
-            <CssBaseline />
+            <CssBaseline/>
             <GlobalStyles
                 styles={{
                     ':root': {
@@ -84,7 +80,7 @@ export default function Login() {
                 }}
             />
             <Box sx={theme => ({
-                width: { xs: '100%', md: '50vw' },
+                width: {xs: '100%', md: '50vw'},
                 transition: 'width var(--Transition-duration)',
                 transitionDelay: 'calc(var(--Transition-duration) + 0.1s)',
                 position: 'relative',
@@ -110,13 +106,13 @@ export default function Login() {
                              display: 'flex',
                              justifyContent: 'space-between',
                          }}>
-                        <Box sx={{ gap: 2, display: 'flex', alignItems: 'center' }}>
+                        <Box sx={{gap: 2, display: 'flex', alignItems: 'center'}}>
                             <IconButton variant="soft" color="primary" size="sm">
-                                <BadgeRoundedIcon />
+                                <BadgeRoundedIcon/>
                             </IconButton>
                             <Typography level="title-lg">Company logo</Typography>
                         </Box>
-                        <BaseDarkMod />
+                        <BaseDarkMod/>
                     </Box>
                     <Box component="main"
                          sx={{
@@ -139,7 +135,7 @@ export default function Login() {
                                  visibility: 'hidden',
                              },
                          }}>
-                        <Stack gap={4} sx={{ mb: 2 }}>
+                        <Stack gap={4} sx={{mb: 2}}>
                             <Stack gap={1}>
                                 <Typography component="h1" level="h3">
                                     Sign in
@@ -154,39 +150,39 @@ export default function Login() {
                             <Button variant="soft"
                                     color="neutral"
                                     fullWidth
-                                    startDecorator={<GoogleIcon />}>
+                                    startDecorator={<GoogleIcon/>}>
                                 Continue with Google
                             </Button>
                         </Stack>
                         <Divider
                             sx={theme => ({
                                 [theme.getColorSchemeSelector('light')]: {
-                                    color: { xs: '#FFF', md: 'text.tertiary' },
+                                    color: {xs: '#FFF', md: 'text.tertiary'},
                                 },
                             })}
                         >
                             or
                         </Divider>
-                        <Stack gap={4} sx={{ mt: 2 }}>
+                        <Stack gap={4} sx={{mt: 2}}>
                             <form onSubmit={event => onLogin(event)}>
                                 <FormControl required error={getErrorUser}>
                                     <FormLabel>Email</FormLabel>
                                     <Input type="email" name="email" value={getCacheUser}
-                                           onChange={event => onChangeUser(event)} />
+                                           onChange={event => onChangeUser(event)}/>
                                 </FormControl>
                                 <FormControl required error={getErrorPassword}>
                                     <FormLabel>Password</FormLabel>
                                     <Input type="password" name="password" value={getCachePassword}
-                                           onChange={event => onChangePassword(event)} />
+                                           onChange={event => onChangePassword(event)}/>
                                 </FormControl>
-                                <Stack gap={4} sx={{ mt: 2 }}>
+                                <Stack gap={4} sx={{mt: 2}}>
                                     <Box sx={{
                                         display: 'flex',
                                         justifyContent: 'space-between',
                                         alignItems: 'center',
                                     }}
                                          onClick={event => onRememberMe(event)}>
-                                        <Checkbox size="sm" label="Remember me" name="persistent" />
+                                        <Checkbox size="sm" label="Remember me" name="persistent"/>
                                         <Link level="title-sm">
                                             Forgot your password?
                                         </Link>
@@ -198,7 +194,7 @@ export default function Login() {
                             </form>
                         </Stack>
                     </Box>
-                    <Box component="footer" sx={{ py: 3 }}>
+                    <Box component="footer" sx={{py: 3}}>
                         <Typography level="body-xs" textAlign="center">
                             © Your company {new Date().getFullYear()}
                         </Typography>
@@ -212,7 +208,7 @@ export default function Login() {
                     right: 0,
                     top: 0,
                     bottom: 0,
-                    left: { xs: 0, md: '50vw' },
+                    left: {xs: 0, md: '50vw'},
                     transition:
                         'background-image var(--Transition-duration), left var(--Transition-duration) !important',
                     transitionDelay: 'calc(var(--Transition-duration) + 0.1s)',

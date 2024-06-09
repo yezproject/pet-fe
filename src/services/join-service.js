@@ -1,19 +1,23 @@
 import HTTP from '@/services/base-api-service';
 
 export async function signIn(params) {
-  return await HTTP.post('auth/sign_in', params);
+  return await HTTP.post('public/sign_in', params);
 }
 
 export function signUp(params) {
-  return HTTP.post('auth/sign_up', params);
+  return HTTP.post('public/sign_up', {
+      fullName: 'admin',
+      email: 'duc0911199873@gmail.com',
+      password: '123456'
+  });
 }
 
 export function getTransactions() {
-    return HTTP.get('api/transactions');
+    return HTTP.get('transactions');
 }
 
 export function getTransactionById(transactionId) {
-    return HTTP.get(`api/transactions/${transactionId}`);
+    return HTTP.get(`transactions/${transactionId}`);
 }
 
 export function addTransaction(params) {
@@ -25,13 +29,13 @@ export function addTransaction(params) {
         transactionDate: 0
     }
     // end
-    return HTTP.post(`api/transactions`, defaultParams);
+    return HTTP.post(`transactions`, defaultParams);
 }
 
 export function updateTransaction(transactionId, params) {
-    return HTTP.put(`api/transactions/${transactionId}`, params);
+    return HTTP.put(`transactions/${transactionId}`, params);
 }
 
 export function deleteTransaction(transactionId) {
-    return HTTP.delete(`api/transactions/${transactionId}`);
+    return HTTP.delete(`transactions/${transactionId}`);
 }
