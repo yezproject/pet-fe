@@ -6,20 +6,14 @@ import Button from "@mui/joy/Button";
 import * as React from "react";
 import {useState} from "react";
 
-export default function AddTransactionsModal() {
+export default function TransactionsModal(props) {
     const currentDate = new Date();
     const formattedDate = currentDate.toISOString().split('T')[0];
-    const [categoryId, setCategoryId] = useState('default cate');
-    const [date, setDate] = useState(formattedDate)
-    const onAddTransactions = (e) => {
-        e.preventDefault();
-        const formElements = e.currentTarget.elements;
-        const date = new Date(formElements.transactionDate.value);
-        const milliseconds = date.getTime();
-    }
+    const [categoryId, setCategoryId] = useState('Default category Id');
+    const [date, setDate] = useState(formattedDate);
 
     return (
-        <form onSubmit={event => onAddTransactions(event)}>
+        <form onSubmit={event => props.onClickSubmit(event)}>
             <FormControl required>
                 <FormLabel>Category Id</FormLabel>
                 <Input type="text" name="categoryId" value={categoryId}
@@ -31,7 +25,7 @@ export default function AddTransactionsModal() {
             </FormControl>
             <FormControl required sx={{mt: 2}}>
                 <FormLabel>Amount</FormLabel>
-                <Input type="text" name="amount"/>
+                <Input type="number" name="amount"/>
             </FormControl>
             <FormControl required sx={{mt: 2}}>
                 <FormLabel>Date</FormLabel>
@@ -40,7 +34,7 @@ export default function AddTransactionsModal() {
             </FormControl>
             <Stack gap={4} sx={{mt: 4}}>
                 <Button type="submit">
-                    Confirm
+                    {props.buttonText}
                 </Button>
             </Stack>
         </form>

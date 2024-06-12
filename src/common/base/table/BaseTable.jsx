@@ -1,74 +1,24 @@
 import * as React from 'react';
 import {Fragment, useState} from 'react';
 import Box from '@mui/joy/Box';
-import Divider from '@mui/joy/Divider';
-import Link from '@mui/joy/Link';
 import Table from '@mui/joy/Table';
 import Sheet from '@mui/joy/Sheet';
 import Checkbox from '@mui/joy/Checkbox';
-import IconButton from '@mui/joy/IconButton';
 import Typography from '@mui/joy/Typography';
-import Menu from '@mui/joy/Menu';
-import MenuButton from '@mui/joy/MenuButton';
-import MenuItem from '@mui/joy/MenuItem';
-import Dropdown from '@mui/joy/Dropdown';
-import ArrowDropDownIcon from '@mui/icons-material/ArrowDropDown';
-import MoreHorizRoundedIcon from '@mui/icons-material/MoreHorizRounded';
 import BaseTableFilters from "@/common/base/table/BaseTableFilters.jsx";
 import PropTypes from "prop-types";
 import BasePagination from "@/common/base/BasePagination.jsx";
+import {minisToDate} from "@/common/constants/covert-time.js";
+import {thousandsNumber} from "@/common/constants/convert-number.js";
 
-function descendingComparator(a, b, orderBy) {
-    if (b[orderBy] < a[orderBy]) {
-        return -1
-    }
-    if (b[orderBy] > a[orderBy]) {
-        return 1
-    }
-    return 0
-}
-
-function getComparator(order, orderBy) {
-    return order === "desc"
-        ? (a, b) => descendingComparator(a, b, orderBy)
-        : (a, b) => -descendingComparator(a, b, orderBy)
-}
-
-function stableSort(array, comparator) {
-    const stabilizedThis = array.map((el, index) => [el, index])
-    stabilizedThis.sort((a, b) => {
-        const order = comparator(a[0], b[0])
-        if (order !== 0) {
-            return order
-        }
-        return a[1] - b[1]
-    })
-    return stabilizedThis.map(el => el[0])
-}
-
-function RowMenu() {
-    return (
-        <Dropdown>
-            <MenuButton
-                slots={{root: IconButton}}
-                slotProps={{root: {variant: 'plain', color: 'neutral', size: 'sm'}}}
-            >
-                <MoreHorizRoundedIcon/>
-            </MenuButton>
-            <Menu size="sm" sx={{minWidth: 140}}>
-                <MenuItem>Edit</MenuItem>
-                <MenuItem>Rename</MenuItem>
-                <MenuItem>Move</MenuItem>
-                <Divider/>
-                <MenuItem color="danger">Delete</MenuItem>
-            </Menu>
-        </Dropdown>
-    );
-}
-
-export default function BaseTable({rows, isCheckbox, isRowMenu, isPagination}) {
-    const [order, setOrder] = useState("desc");
+export default function BaseTable({rows, isCheckbox, isRowMenu, isPagination, menu}) {
     const [selected, setSelected] = useState([]);
+    const style = {
+        overflow: 'hidden',
+        textOverflow: 'ellipsis',
+        whiteSpace: 'nowrap',
+        cursor: 'pointer'
+    }
 
     return (
         <Fragment>
@@ -115,24 +65,8 @@ export default function BaseTable({rows, isCheckbox, isRowMenu, isPagination}) {
                                 }
                                 sx={{verticalAlign: 'text-bottom'}}/>
                         </th>}
-                        <th style={{width: 100, padding: '12px 6px'}}>
-                            <Link underline="none"
-                                  color="primary"
-                                  component="button"
-                                  onClick={() => setOrder(order === 'asc' ? 'desc' : 'asc')}
-                                  fontWeight="lg"
-                                  endDecorator={<ArrowDropDownIcon/>}
-                                  sx={{
-                                      '& svg': {
-                                          transition: '0.2s',
-                                          transform:
-                                              order === 'desc' ? 'rotate(0deg)' : 'rotate(180deg)',
-                                      },
-                                  }}>
-                                Name
-                            </Link>
-                        </th>
-                        <th style={{width: 120, padding: '12px 6px'}}>Transaction Date</th>
+                        <th style={{width: 100, padding: '12px 6px'}}>Name</th>
+                        <th style={{width: 80, padding: '12px 6px'}}>Date</th>
                         <th style={{width: 100, padding: '12px 6px'}}>Id</th>
                         <th style={{width: 100, padding: '12px 6px'}}>Category Id</th>
                         <th style={{width: 60, padding: '12px 6px'}}>Amount</th>
@@ -140,7 +74,7 @@ export default function BaseTable({rows, isCheckbox, isRowMenu, isPagination}) {
                     </tr>
                     </thead>
                     <tbody>
-                    {stableSort(rows, getComparator(order, 'name')).map((row) => (
+                    {rows.map((row) => (
                         <tr key={row.id}>
                             {isCheckbox && <td style={{textAlign: 'center', width: 120}}>
                                 <Checkbox
@@ -159,32 +93,35 @@ export default function BaseTable({rows, isCheckbox, isRowMenu, isPagination}) {
                                 />
                             </td>}
                             <td>
-                                <Typography level="body-xs">{row.name}</Typography>
+                                <Typography style={style}
+                                            level="body-xs"
+                                            title={row.name}>
+                                    {row.name}
+                                </Typography>
                             </td>
                             <td>
-                                <Typography level="body-xs">{row.transactionDate}</Typography>
+                                <Typography level="body-xs">{minisToDate(row.transactionDate)}</Typography>
                             </td>
                             <td>
-                                <Typography style={{
-                                    overflow: 'hidden',
-                                    textOverflow: 'ellipsis',
-                                    whiteSpace: 'nowrap',
-                                    cursor: 'pointer'
-                                }}
+                                <Typography style={style}
                                             level="body-xs"
                                             title={row.id}>
                                     {row.id}
                                 </Typography>
                             </td>
                             <td>
-                                <Typography level="body-xs">{row.categoryId}</Typography>
+                                <Typography style={style}
+                                            level="body-xs"
+                                            title={row.categoryId}>
+                                    {row.categoryId}
+                                </Typography>
                             </td>
                             <td>
-                                <Typography level="body-xs">{row.amount}</Typography>
+                                <Typography level="body-xs">{thousandsNumber(row.amount)}</Typography>
                             </td>
                             {isRowMenu && <td>
                                 <Box sx={{display: 'flex', gap: 2, alignItems: 'center'}}>
-                                    <RowMenu/>
+                                    {menu(row.id)}
                                 </Box>
                             </td>}
                         </tr>
