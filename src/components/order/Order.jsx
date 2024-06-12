@@ -7,22 +7,61 @@ import Typography from '@mui/joy/Typography';
 import Button from '@mui/joy/Button';
 import * as React from 'react';
 import {useEffect, useState} from 'react';
-import {getTransactions} from '@/services/join-service.js';
+import {addTransaction, deleteTransactions, getTransactions} from '@/services/join-service.js';
 import {AddBox} from "@mui/icons-material";
 import BaseModal from "@/common/base/modal/BaseModal.jsx";
-import AddTransactionsModal from "@/components/order/AddTransactionsModal.jsx";
+import TransactionsModal from "@/components/order/TransactionsModal.jsx";
+import {dateToMinis} from "@/common/constants/covert-time.js";
+import BaseMoreOption from "@/common/base/BaseMoreOption.jsx";
 
 const BaseTable = React.lazy(() => import('@/common/base/table/BaseTable.jsx'));
 
 export default function Order() {
     const [transactions, setTransactions] = useState([]);
     const [openModal, setOpenModal] = useState(false);
+    const [selectedTransaction, setSelectedTransaction] = useState({});
+    const menuItems = (id) => [
+        {label: 'Edit', action: () => handleEdit(id)},
+        {label: 'Rename', action: () => console.log('Rename clicked')},
+        {label: 'Move', action: () => console.log('Move clicked')},
+        {label: 'Delete', action: () => handleDelete(id)}
+    ];
+    const divider = ['Move'];
 
     useEffect(() => {
         getTransactions().then(data => {
             setTransactions(data.data);
         });
-    }, [])
+    }, []);
+
+    const onAddTransactions = async (e) => {
+        e.preventDefault();
+        const formElements = e.currentTarget.elements;
+        const formData = {
+            categoryId: formElements.categoryId.value,
+            name: formElements.name.value,
+            amount: formElements.amount.value,
+            transactionDate: dateToMinis(formElements.transactionDate.value),
+        };
+        const {data, status} = await addTransaction(formData);
+        if (status === 201) {
+            setTransactions([...transactions, {
+                ...formData,
+                id: data.id,
+            }]);
+            setOpenModal(false);
+        }
+    }
+
+    const handleDelete = async (itemId) => {
+        const {status} = await deleteTransactions([itemId]);
+        console.log(status)
+    };
+
+    const handleEdit = async (itemId) => {
+        setSelectedTransaction(transactions.filter(item => item.id === itemId));
+        setOpenModal(true);
+    };
 
     return <Box
         component="main"
@@ -93,9 +132,11 @@ export default function Order() {
                 Add transactions
             </Button>
         </Box>
-        <BaseTable rows={transactions}/>
+        <BaseTable rows={transactions} menu={(id) => <BaseMoreOption menuItems={menuItems(id)} divider={divider}/>}/>
         <BaseModal open={openModal}
-                   body={<AddTransactionsModal/>}
+                   body={<TransactionsModal buttonText={'Add transaction'}
+                                            transaction={setSelectedTransaction}
+                                            onClickSubmit={(event) => onAddTransactions(event)}/>}
                    title={'Add transaction'}
                    setOpen={() => setOpenModal(false)}/>
     </Box>;

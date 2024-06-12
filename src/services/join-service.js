@@ -18,20 +18,20 @@ export function getTransactionById(transactionId) {
 
 export function addTransaction(params) {
     // start add default
-    const defaultParams = {
-        categoryId: "string",
-        name: "transaction one",
-        amount: 2000000,
-        transactionDate: 0
-    }
+    // const defaultParams = {
+    //     categoryId: "string",
+    //     name: "transaction one",
+    //     amount: 2000000,
+    //     transactionDate: 0
+    // }
     // end
-    return HTTP.post(`transactions`, defaultParams);
+    return HTTP.post(`transactions`, params);
 }
 
 export function updateTransaction(transactionId, params) {
     return HTTP.put(`transactions/${transactionId}`, params);
 }
 
-export function deleteTransaction(transactionId) {
-    return HTTP.delete(`transactions/${transactionId}`);
+export function deleteTransactions(params) {
+    return HTTP.delete(`transactions?ids=${params}`);
 }
