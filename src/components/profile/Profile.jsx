@@ -29,10 +29,10 @@ import AccessTimeFilledRoundedIcon from "@mui/icons-material/AccessTimeFilledRou
 import VideocamRoundedIcon from "@mui/icons-material/VideocamRounded"
 import InsertDriveFileRoundedIcon from "@mui/icons-material/InsertDriveFileRounded"
 import EditRoundedIcon from "@mui/icons-material/EditRounded"
-import BaseFileUpload from '@/common/base/BaseFileUpload.jsx';
-import BaseDropZone from '@/common/base/BaseDropZone.jsx';
-import BaseEditorToolbar from '@/common/base/BaseEditorToolbar.jsx';
-import BaseCountrySelector from '@/common/base/BaseCountrySelector.jsx';
+import BaseFileUpload from "@/common/base/BaseFileUpload.jsx"
+import BaseDropZone from "@/common/base/BaseDropZone.jsx"
+import BaseEditorToolbar from "@/common/base/BaseEditorToolbar.jsx"
+import BaseCountrySelector from "@/common/base/BaseCountrySelector.jsx"
 
 
 export default function Profile() {

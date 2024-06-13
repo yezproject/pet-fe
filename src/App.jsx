@@ -1,8 +1,8 @@
-import {Route, Routes} from 'react-router-dom';
-import React, {Suspense} from 'react';
+import {Route, Routes} from "react-router-dom"
+import React, {Suspense} from "react"
 
-const Main = React.lazy(() => import('@/layout/main/Main.jsx'));
-const Login = React.lazy(() => import('@/components/login/Login.jsx'));
+const Main = React.lazy(() => import("@/layout/main/Main.jsx"))
+const Login = React.lazy(() => import("@/components/login/Login.jsx"))
 
 export default function App() {
     return (
@@ -12,5 +12,5 @@ export default function App() {
                 <Route path="/main/*" element={<Main/>}/>
             </Routes>
         </Suspense>
-    );
+    )
 }

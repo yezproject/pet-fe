@@ -1,24 +1,24 @@
-import * as React from 'react';
-import Box from '@mui/joy/Box';
-import Button from '@mui/joy/Button';
-import Divider from '@mui/joy/Divider';
-import FormControl from '@mui/joy/FormControl';
-import FormLabel from '@mui/joy/FormLabel';
-import Input from '@mui/joy/Input';
-import Modal from '@mui/joy/Modal';
-import ModalDialog from '@mui/joy/ModalDialog';
-import ModalClose from '@mui/joy/ModalClose';
-import Select from '@mui/joy/Select';
-import Option from '@mui/joy/Option';
-import Sheet from '@mui/joy/Sheet';
-import Typography from '@mui/joy/Typography';
-import FilterAltIcon from '@mui/icons-material/FilterAlt';
-import SearchIcon from '@mui/icons-material/Search';
-import {Fragment, useState} from "react";
-import IconButton from "@mui/joy/IconButton";
+import * as React from "react"
+import Box from "@mui/joy/Box"
+import Button from "@mui/joy/Button"
+import Divider from "@mui/joy/Divider"
+import FormControl from "@mui/joy/FormControl"
+import FormLabel from "@mui/joy/FormLabel"
+import Input from "@mui/joy/Input"
+import Modal from "@mui/joy/Modal"
+import ModalDialog from "@mui/joy/ModalDialog"
+import ModalClose from "@mui/joy/ModalClose"
+import Select from "@mui/joy/Select"
+import Option from "@mui/joy/Option"
+import Sheet from "@mui/joy/Sheet"
+import Typography from "@mui/joy/Typography"
+import FilterAltIcon from "@mui/icons-material/FilterAlt"
+import SearchIcon from "@mui/icons-material/Search"
+import {Fragment, useState} from "react"
+import IconButton from "@mui/joy/IconButton"
 
 export default function BaseTableFilters() {
-    const [open, setOpen] = useState(false);
+    const [open, setOpen] = useState(false)
 
     const renderFilters = () => (
         <Fragment>
@@ -27,7 +27,7 @@ export default function BaseTableFilters() {
                 <Select
                     size="sm"
                     placeholder="Filter by status"
-                    slotProps={{button: {sx: {whiteSpace: 'nowrap'}}}}
+                    slotProps={{button: {sx: {whiteSpace: "nowrap"}}}}
                 >
                     <Option value="paid">Paid</Option>
                     <Option value="pending">Pending</Option>
@@ -57,13 +57,13 @@ export default function BaseTableFilters() {
                 </Select>
             </FormControl>
         </Fragment>
-    );
+    )
     return (
         <Fragment>
             <Sheet
                 className="SearchAndFilters-mobile"
                 sx={{
-                    display: {xs: 'flex', sm: 'none'},
+                    display: {xs: "flex", sm: "none"},
                     my: 1,
                     gap: 1,
                 }}
@@ -89,7 +89,7 @@ export default function BaseTableFilters() {
                             Filters
                         </Typography>
                         <Divider sx={{my: 2}}/>
-                        <Sheet sx={{display: 'flex', flexDirection: 'column', gap: 2}}>
+                        <Sheet sx={{display: "flex", flexDirection: "column", gap: 2}}>
                             {renderFilters()}
                             <Button color="primary" onClick={() => setOpen(false)}>
                                 Submit
@@ -101,13 +101,13 @@ export default function BaseTableFilters() {
             <Box
                 className="SearchAndFilters-tabletUp"
                 sx={{
-                    borderRadius: 'sm',
+                    borderRadius: "sm",
                     py: 2,
-                    display: {xs: 'none', sm: 'flex'},
-                    flexWrap: 'wrap',
+                    display: {xs: "none", sm: "flex"},
+                    flexWrap: "wrap",
                     gap: 1.5,
-                    '& > *': {
-                        minWidth: {xs: '120px', md: '160px'},
+                    "& > *": {
+                        minWidth: {xs: "120px", md: "160px"},
                     },
                 }}
             >
@@ -118,5 +118,5 @@ export default function BaseTableFilters() {
                 {renderFilters()}
             </Box>
         </Fragment>
-    );
+    )
 }

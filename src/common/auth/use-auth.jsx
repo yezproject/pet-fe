@@ -1,27 +1,27 @@
-import { createContext, useContext, useMemo } from "react";
-import { useNavigate } from "react-router-dom";
-import { clearToken, clearUser, getToken, getUser, setToken, setUser } from '@/common/storage/local-storage.js';
+import { createContext, useContext, useMemo } from "react"
+import { useNavigate } from "react-router-dom"
+import { clearToken, clearUser, getToken, getUser, setToken, setUser } from "@/common/storage/local-storage.js"
 
-const AuthContext = createContext();
+const AuthContext = createContext()
 
 export const AuthProvider = ({ children }) => {
-    const navigate = useNavigate();
+    const navigate = useNavigate()
     const login = async (data) => {
-        setToken(data);
-        navigate("/main", { replace: true });
-    };
+        setToken(data)
+        navigate("/main", { replace: true })
+    }
 
     const logout = () => {
-        clearToken(null);
-        navigate("/", { replace: true });
-    };
+        clearToken(null)
+        navigate("/", { replace: true })
+    }
 
     const cacheUser = async (data, remember) => {
         if(!remember) {
-            clearUser();
+            clearUser()
         } else {
-            if(getUser()) clearUser();
-            setUser(data);
+            if(getUser()) clearUser()
+            setUser(data)
         }
     }
 
@@ -33,11 +33,11 @@ export const AuthProvider = ({ children }) => {
             cacheUser
         }),
         [getToken()]
-    );
+    )
 
-    return <AuthContext.Provider value={value}>{children}</AuthContext.Provider>;
-};
+    return <AuthContext.Provider value={value}>{children}</AuthContext.Provider>
+}
 
 export const useAuth = () => {
-    return useContext(AuthContext);
-};
+    return useContext(AuthContext)
+}

@@ -1,7 +1,5 @@
 function thousandsNumber(number) {
-    return number.toLocaleString();
+    return number.toLocaleString()
 }
 
-export {
-    thousandsNumber,
-}
+export { thousandsNumber }

@@ -1,9 +1,9 @@
-import * as React from 'react';
-import Box from '@mui/joy/Box';
-import Button from '@mui/joy/Button';
-import IconButton, {iconButtonClasses} from '@mui/joy/IconButton';
-import KeyboardArrowRightIcon from '@mui/icons-material/KeyboardArrowRight';
-import KeyboardArrowLeftIcon from '@mui/icons-material/KeyboardArrowLeft';
+import * as React from "react"
+import Box from "@mui/joy/Box"
+import Button from "@mui/joy/Button"
+import IconButton, {iconButtonClasses} from "@mui/joy/IconButton"
+import KeyboardArrowRightIcon from "@mui/icons-material/KeyboardArrowRight"
+import KeyboardArrowLeftIcon from "@mui/icons-material/KeyboardArrowLeft"
 
 export default function BasePagination() {
     return (
@@ -13,10 +13,10 @@ export default function BasePagination() {
                 sx={{
                     pt: 2,
                     gap: 1,
-                    [`& .${iconButtonClasses.root}`]: {borderRadius: '50%'},
+                    [`& .${iconButtonClasses.root}`]: {borderRadius: "50%"},
                     display: {
-                        xs: 'none',
-                        md: 'flex',
+                        xs: "none",
+                        md: "flex",
                     },
                 }}
             >
@@ -30,11 +30,11 @@ export default function BasePagination() {
                 </Button>
 
                 <Box sx={{flex: 1}}/>
-                {['1', '2', '3', '…', '8', '9', '10'].map((page) => (
+                {["1", "2", "3", "…", "8", "9", "10"].map((page) => (
                     <IconButton
                         key={page}
                         size="sm"
-                        variant={Number(page) ? 'outlined' : 'plain'}
+                        variant={Number(page) ? "outlined" : "plain"}
                         color="neutral"
                     >
                         {page}
@@ -52,5 +52,5 @@ export default function BasePagination() {
                 </Button>
             </Box>
         </>
-    );
+    )
 }

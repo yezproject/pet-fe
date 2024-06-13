@@ -1,10 +1,10 @@
-import * as React from 'react';
-import ModalClose from "@mui/joy/ModalClose";
-import {Typography} from "@mui/joy";
-import Sheet from "@mui/joy/Sheet";
-import Modal from "@mui/joy/Modal";
-import PropTypes from "prop-types";
-import Stack from "@mui/joy/Stack";
+import * as React from "react"
+import ModalClose from "@mui/joy/ModalClose"
+import {Typography} from "@mui/joy"
+import Sheet from "@mui/joy/Sheet"
+import Modal from "@mui/joy/Modal"
+import PropTypes from "prop-types"
+import Stack from "@mui/joy/Stack"
 
 export default function BaseModal(props) {
     return (
@@ -14,16 +14,16 @@ export default function BaseModal(props) {
                 aria-describedby="modal-desc"
                 open={props.open}
                 onClose={() => props.setOpen()}
-                sx={{display: 'flex', justifyContent: 'center', alignItems: 'center', zIndex: 10000}}
+                sx={{display: "flex", justifyContent: "center", alignItems: "center", zIndex: 10000}}
             >
                 <Sheet
                     variant="outlined"
                     sx={{
                         maxWidth: 400,
                         width: "100%",
-                        borderRadius: 'md',
+                        borderRadius: "md",
                         p: 3,
-                        boxShadow: 'lg',
+                        boxShadow: "lg",
                     }}
                 >
                     <ModalClose variant="plain" sx={{m: 1}}/>
@@ -43,15 +43,15 @@ export default function BaseModal(props) {
                 </Sheet>
             </Modal>
         </>
-    );
+    )
 }
 
 BaseModal.propTypes = {
     open: PropTypes.bool,
     title: PropTypes.string,
-};
+}
 
 BaseModal.defaultProps = {
     open: false,
-    title: 'This is the modal title',
-};
+    title: "This is the modal title",
+}
