@@ -6,7 +6,7 @@ export default [
     {
         files: ["src/**/*.js", "src/**/*.jsx"],
         rules: {
-            "no-unused-vars": "warn",
+            "no-unused-vars": "off",
             quotes: ["error", "double"],
             "jsx-quotes": ["error", "prefer-double"],
             "semi": ["error", "never"],
