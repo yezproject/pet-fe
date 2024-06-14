@@ -11,7 +11,7 @@ import BasePagination from "@/common/base/BasePagination.jsx"
 import {minisToDate} from "@/common/constants/covert-time.js"
 import {thousandsNumber} from "@/common/constants/convert-number.js"
 
-export default function BaseTable({rows, isCheckbox, isRowMenu, isPagination, menu}) {
+export default function BaseTable({rows, isCheckbox = true, isRowMenu = true, isPagination = true, menu}) {
     const [selected, setSelected] = useState([])
     const style = {
         overflow: "hidden",
@@ -22,7 +22,7 @@ export default function BaseTable({rows, isCheckbox, isRowMenu, isPagination, me
 
     return (
         <Fragment>
-            <BaseTableFilters/>
+            <BaseTableFilters />
             <Sheet className="OrderTableContainer"
                 variant="outlined"
                 sx={{
@@ -137,10 +137,4 @@ export default function BaseTable({rows, isCheckbox, isRowMenu, isPagination, me
 BaseTable.propTypes = {
     rows: PropTypes.array.isRequired,
     isCheckbox: PropTypes.bool,
-}
-
-BaseTable.defaultProps = {
-    isCheckbox: true,
-    isRowMenu: true,
-    isPagination: true,
 }
