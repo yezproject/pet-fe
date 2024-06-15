@@ -8,7 +8,7 @@ export const AuthProvider = ({ children }) => {
     const navigate = useNavigate()
     const login = async (data) => {
         setToken(data)
-        navigate("/main", { replace: true })
+        navigate("/", { replace: true })
     }
 
     const logout = () => {

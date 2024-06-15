@@ -1,15 +1,16 @@
 import { useColorScheme } from "@mui/joy/styles"
-import * as React from "react"
-import IconButton from "@mui/joy/IconButton"
+
 import DarkModeRoundedIcon from "@mui/icons-material/DarkModeRounded"
 import LightModeRoundedIcon from "@mui/icons-material/LightModeRounded"
+import IconButton from "@mui/joy/IconButton"
+import { useEffect, useState } from "react"
 
 export default function BaseDarkMod(props) {
     const { onClick, ...other } = props
     const { mode, setMode } = useColorScheme()
-    const [mounted, setMounted] = React.useState(false)
+    const [mounted, setMounted] = useState(false)
 
-    React.useEffect(() => setMounted(true), [])
+    useEffect(() => setMounted(true), [])
 
     const changeDarkTheme = () => {
         setMode(mode === "light" ? "dark" : "light")

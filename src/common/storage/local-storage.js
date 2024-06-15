@@ -2,11 +2,11 @@ const JWT_KEY = "token"
 const USER = "user"
 
 function getToken() {
-    return JSON.parse(window.localStorage.getItem(JWT_KEY))
+    return window.localStorage.getItem(JWT_KEY)
 }
 
 function setToken(token) {
-    return window.localStorage.setItem(JWT_KEY, JSON.stringify(token))
+    return window.localStorage.setItem(JWT_KEY, token)
 }
 
 function clearToken() {

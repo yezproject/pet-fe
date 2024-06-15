@@ -1,4 +1,3 @@
-import * as React from "react"
 import Box from "@mui/joy/Box"
 import Select from "@mui/joy/Select"
 import Option from "@mui/joy/Option"
@@ -18,9 +17,9 @@ export default function BaseEditorToolbar(props) {
                 {
                     display: "flex",
                     gap: 0.5,
-                    "& > button": { "--Icon-fontSize": "16px" }
+                    "& > button": { "--Icon-fontSize": "16px" },
                 },
-                ...(Array.isArray(sx) ? sx : [sx])
+                ...(Array.isArray(sx) ? sx : [sx]),
             ]}
         >
             <Select size="sm" defaultValue="1" sx={{ minWidth: 160 }}>

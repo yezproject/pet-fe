@@ -1,22 +1,17 @@
 import Box from "@mui/joy/Box"
-import Breadcrumbs from "@mui/joy/Breadcrumbs"
-import ChevronRightRoundedIcon from "@mui/icons-material/ChevronRightRounded.js"
-import Link from "@mui/joy/Link"
-import HomeRoundedIcon from "@mui/icons-material/HomeRounded.js"
-import Typography from "@mui/joy/Typography"
 import Button from "@mui/joy/Button"
-import * as React from "react"
-import { useEffect, useState } from "react"
+import Typography from "@mui/joy/Typography"
+
+import BaseMoreOption from "@/common/base/BaseMoreOption.jsx"
+import BaseModal from "@/common/base/modal/BaseModal.jsx"
+import { dateToMinis } from "@/common/constants/covert-time.js"
+import TransactionsModal from "@/components/order/TransactionsModal.jsx"
 import { addTransaction, deleteTransactions, getTransactions } from "@/services/join-service.js"
 import { AddBox } from "@mui/icons-material"
-import BaseModal from "@/common/base/modal/BaseModal.jsx"
-import TransactionsModal from "@/components/order/TransactionsModal.jsx"
-import { dateToMinis } from "@/common/constants/covert-time.js"
-import BaseMoreOption from "@/common/base/BaseMoreOption.jsx"
+import { useEffect, useState } from "react"
+import BaseTable from "@/common/base/table/BaseTable.jsx"
 
-const BaseTable = React.lazy(() => import("@/common/base/table/BaseTable.jsx"))
-
-export default function Order() {
+export default function TransactionList() {
     const [transactions, setTransactions] = useState([])
     const [openModal, setOpenModal] = useState(false)
     const [selectedTransaction, setSelectedTransaction] = useState({})
@@ -67,43 +62,7 @@ export default function Order() {
     }
 
     return (
-        <Box
-            component="main"
-            className="MainContent"
-            sx={{
-                px: { xs: 2, md: 6 },
-                pt: {
-                    xs: "calc(12px + var(--Header-height))",
-                    sm: "calc(12px + var(--Header-height))",
-                    md: 3,
-                },
-                pb: { xs: 2, sm: 2, md: 3 },
-                flex: 1,
-                display: "flex",
-                flexDirection: "column",
-                minWidth: 0,
-                height: "100dvh",
-                gap: 1,
-            }}
-        >
-            <Box sx={{ display: "flex", alignItems: "center" }}>
-                <Breadcrumbs
-                    size="sm"
-                    aria-label="breadcrumbs"
-                    separator={<ChevronRightRoundedIcon fontSize="sm" />}
-                    sx={{ pl: 0 }}
-                >
-                    <Link underline="none" color="neutral" href="#some-link" aria-label="Home">
-                        <HomeRoundedIcon />
-                    </Link>
-                    <Link underline="hover" color="neutral" href="#some-link" fontSize={12} fontWeight={500}>
-                        Dashboard
-                    </Link>
-                    <Typography color="primary" fontWeight={500} fontSize={12}>
-                        Orders
-                    </Typography>
-                </Breadcrumbs>
-            </Box>
+        <Box>
             <Box
                 sx={{
                     display: "flex",
@@ -116,10 +75,10 @@ export default function Order() {
                 }}
             >
                 <Typography level="h2" component="h1">
-                    Orders
+                    Transaction
                 </Typography>
                 <Button color="primary" startDecorator={<AddBox />} size="sm" onClick={() => setOpenModal(true)}>
-                    Add transactions
+                    Add transaction
                 </Button>
             </Box>
             <BaseTable

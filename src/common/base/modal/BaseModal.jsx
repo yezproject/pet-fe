@@ -1,4 +1,4 @@
-import * as React from "react"
+
 import ModalClose from "@mui/joy/ModalClose"
 import { Typography } from "@mui/joy"
 import Sheet from "@mui/joy/Sheet"

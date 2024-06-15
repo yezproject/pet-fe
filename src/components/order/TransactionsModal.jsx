@@ -3,7 +3,7 @@ import FormLabel from "@mui/joy/FormLabel"
 import Input from "@mui/joy/Input"
 import Stack from "@mui/joy/Stack"
 import Button from "@mui/joy/Button"
-import * as React from "react"
+
 import { useState } from "react"
 
 export default function TransactionsModal(props) {

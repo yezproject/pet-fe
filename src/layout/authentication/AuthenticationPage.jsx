@@ -1,4 +1,3 @@
-import * as React from "react"
 import { CssVarsProvider } from "@mui/joy/styles"
 import GlobalStyles from "@mui/joy/GlobalStyles"
 import CssBaseline from "@mui/joy/CssBaseline"
@@ -7,23 +6,14 @@ import IconButton from "@mui/joy/IconButton"
 import Typography from "@mui/joy/Typography"
 import BadgeRoundedIcon from "@mui/icons-material/BadgeRounded"
 import BaseDarkMod from "@/common/base/BaseDarkMod.jsx"
-import { Navigate, Route, Routes } from "react-router-dom"
-import SignIn from "@/components/login/Signin.jsx"
-import SignUp from "@/components/login/Signup.jsx"
-import Snackbar from "@mui/joy/Snackbar"
+import { Navigate, Outlet } from "react-router-dom"
 import { getToken } from "@/common/storage/local-storage.js"
 
-export default function Login() {
-    const [open, setOpen] = React.useState(false)
-    const [toast, setToast] = React.useState(null)
-
+export default function AuthenticationPage() {
     if (getToken()) {
-        return <Navigate to="/main" />
+        return <Navigate to="/" />
     }
-    const onShowToast = (e) => {
-        setOpen(true)
-        setToast(e)
-    }
+
     return (
         <CssVarsProvider defaultMode="dark" disableTransitionOnChange>
             <CssBaseline />
@@ -98,10 +88,7 @@ export default function Login() {
                             },
                         }}
                     >
-                        <Routes>
-                            <Route path="/" element={<SignIn />} />
-                            <Route path="/sign-up" element={<SignUp showToast={(e) => onShowToast(e)} />} />
-                        </Routes>
+                        <Outlet />
                     </Box>
                     <Box component="footer" sx={{ py: 3 }}>
                         <Typography level="body-xs" textAlign="center">
@@ -133,15 +120,7 @@ export default function Login() {
                     },
                 })}
             />
-            <Snackbar
-                open={open}
-                onClose={() => {
-                    setOpen(false)
-                }}
-                autoHideDuration={4000}
-            >
-                {toast}
-            </Snackbar>
+
         </CssVarsProvider>
     )
 }

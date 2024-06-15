@@ -10,7 +10,6 @@ export default [
             quotes: ["error", "double"],
             "jsx-quotes": ["error", "prefer-double"],
             "semi": ["error", "never"],
-            "indent": ["error", 4]
         },
         languageOptions: {
             ecmaVersion: 2022,

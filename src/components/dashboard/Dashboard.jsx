@@ -1,4 +1,4 @@
-import { Box, Breadcrumbs, Link, Typography, Button } from "@mui/joy"
+import { Box, Typography } from "@mui/joy"
 
 import MainBreadcrumbs from "@/components/MainBreadcrumbs"
 
@@ -20,7 +20,7 @@ export default function Dashboard() {
             }}
         >
             <Box sx={{ display: "flex", alignItems: "center" }}>
-                <MainBreadcrumbs breadcrumbTexts={["Dashboard"]}/>
+                <MainBreadcrumbs breadcrumbTexts={["Dashboard"]} />
             </Box>
             <Box
                 sx={{

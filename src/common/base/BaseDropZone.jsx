@@ -1,4 +1,3 @@
-import * as React from "react"
 import Card from "@mui/joy/Card"
 import Link from "@mui/joy/Link"
 import Typography from "@mui/joy/Typography"
@@ -21,9 +20,9 @@ export default function BaseDropZone(props) {
                     alignItems: "center",
                     px: 3,
                     flexGrow: 1,
-                    boxShadow: "none"
+                    boxShadow: "none",
                 },
-                ...(Array.isArray(sx) ? sx : [sx])
+                ...(Array.isArray(sx) ? sx : [sx]),
             ]}
         >
             <AspectRatio
@@ -33,7 +32,7 @@ export default function BaseDropZone(props) {
                 sx={{
                     minWidth: 32,
                     borderRadius: "50%",
-                    "--Icon-fontSize": "16px"
+                    "--Icon-fontSize": "16px",
                 }}
             >
                 <div>{icon ?? <FileUploadRoundedIcon />}</div>

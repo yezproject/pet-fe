@@ -21,21 +21,19 @@ const HTTP = () => {
 
     instance.interceptors.response.use(
         (response) => {
-            if (response.headers.getContentType === "application/json") {
+            if (response?.headers?.getContentType === "application/json") {
                 response.data = JSON.parse(jsesc(response.data, { json: true }))
             }
             return response
         },
         (error) => {
             if (error?.response?.status === 401) {
-                // if (router.currentRoute.value.redirectedFrom?.path === '/') {
-                //   router.push({
-                //     name: 'home',
-                //     params: error.response.data,
-                //   });
-                //   // return Promise.reject(error.response)
-                // }
                 clearToken()
+                const currentPage = window.location.pathname
+                if (currentPage !== "/auth/sign-in") {
+                    window.location.href = "/auth/sign-in"
+                }
+                return Promise.reject(error.response)
             }
             if (error?.response?.status === 403) {
                 // router.push({

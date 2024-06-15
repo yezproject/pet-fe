@@ -1,4 +1,3 @@
-import * as React from "react"
 import GlobalStyles from "@mui/joy/GlobalStyles"
 import Avatar from "@mui/joy/Avatar"
 import Box from "@mui/joy/Box"
@@ -33,11 +32,12 @@ import KeyboardArrowDownIcon from "@mui/icons-material/KeyboardArrowDown"
 import { closeSidebar } from "@/contains/logic-sidebar.js"
 import BaseDarkMod from "@/common/base/BaseDarkMod.jsx"
 import { useAuth } from "@/common/auth/use-auth.jsx"
+import { Fragment, useState } from "react"
 
-function Toggler({ defaultExpanded = false, renderToggle, children }) {
-    const [open, setOpen] = React.useState(defaultExpanded)
+function Toggle({ defaultExpanded = false, renderToggle, children }) {
+    const [open, setOpen] = useState(defaultExpanded)
     return (
-        <React.Fragment>
+        <Fragment>
             {renderToggle({ open, setOpen })}
             <Box
                 sx={{
@@ -51,7 +51,7 @@ function Toggler({ defaultExpanded = false, renderToggle, children }) {
             >
                 {children}
             </Box>
-        </React.Fragment>
+        </Fragment>
     )
 }
 
@@ -164,13 +164,13 @@ export default function Sidebar() {
                         <ListItemButton selected>
                             <ShoppingCartRoundedIcon />
                             <ListItemContent>
-                                <Typography level="title-sm">Orders</Typography>
+                                <Typography level="title-sm">Transaction</Typography>
                             </ListItemContent>
                         </ListItemButton>
                     </ListItem>
 
                     <ListItem nested>
-                        <Toggler
+                        <Toggle
                             renderToggle={({ open, setOpen }) => (
                                 <ListItemButton onClick={() => setOpen(!open)}>
                                     <AssignmentRoundedIcon />
@@ -195,7 +195,7 @@ export default function Sidebar() {
                                     <ListItemButton>Done</ListItemButton>
                                 </ListItem>
                             </List>
-                        </Toggler>
+                        </Toggle>
                     </ListItem>
 
                     <ListItem>
@@ -215,7 +215,7 @@ export default function Sidebar() {
                     </ListItem>
 
                     <ListItem nested>
-                        <Toggler
+                        <Toggle
                             renderToggle={({ open, setOpen }) => (
                                 <ListItemButton onClick={() => setOpen(!open)}>
                                     <GroupRoundedIcon />
@@ -239,7 +239,7 @@ export default function Sidebar() {
                                     <ListItemButton>Roles & permission</ListItemButton>
                                 </ListItem>
                             </List>
-                        </Toggler>
+                        </Toggle>
                     </ListItem>
                 </List>
 
