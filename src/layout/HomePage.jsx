@@ -1,27 +1,17 @@
 import { Box, Typography } from "@mui/joy"
 
 import MainBreadcrumbs from "@/components/MainBreadcrumbs"
+import Chart from "react-apexcharts"
 
 export default function Home() {
+    const state = {
+        options: {},
+        series: [44, 55, 41, 17, 15],
+        labels: ["A", "B", "C", "D", "E"]
+    }
+
     return (
-        <Box
-            component="main"
-            className="MainContent"
-            sx={{
-                px: 2,
-                pt: "65px",
-                pb: 2,
-                flex: 1,
-                display: "flex",
-                flexDirection: "column",
-                minWidth: 0,
-                height: "100dvh",
-                gap: 1,
-            }}
-        >
-            <Box sx={{ display: "flex", alignItems: "center" }}>
-                <MainBreadcrumbs breadcrumbTexts={["Dashboard"]} />
-            </Box>
+        <Box>
             <Box
                 sx={{
                     display: "flex",
@@ -34,8 +24,14 @@ export default function Home() {
                 }}
             >
                 <Typography level="h2">
-                    Dashboard
+                    Home
                 </Typography>
+            </Box>
+
+            <Box>
+                <div className="donut">
+                    <Chart options={state.options} series={state.series} type="donut" width="380" />
+                </div>
             </Box>
         </Box>
     )

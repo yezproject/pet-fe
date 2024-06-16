@@ -56,12 +56,14 @@ function Toggle({ defaultExpanded = false, renderToggle, children }) {
     )
 }
 
-export default function Sidebar() {
+export default function Sidebar({ onChangeMenu }) {
     const navigate = useNavigate()
-    const [selectedMenu, setSelectedMenu] = useState("transaction")
+    const [selectedMenu, setSelectedMenu] = useState("home")
     const { logout } = useAuth()
-    const navigatePage = useEffect(() => {
+
+    useEffect(() => {
         navigate(`/${selectedMenu}`)
+        onChangeMenu(selectedMenu)
     }, [selectedMenu])
 
     const onClickLogout = () => {

@@ -1,22 +1,26 @@
+import MainBreadcrumbs from "@/components/MainBreadcrumbs"
 import Header from "@/layout/header/Header.jsx"
 import Sidebar from "@/layout/sidebar/Sidebar.jsx"
-import ChevronRightRoundedIcon from "@mui/icons-material/ChevronRightRounded.js"
-import HomeRoundedIcon from "@mui/icons-material/HomeRounded.js"
 import Box from "@mui/joy/Box"
-import Breadcrumbs from "@mui/joy/Breadcrumbs"
 import CssBaseline from "@mui/joy/CssBaseline"
-import Link from "@mui/joy/Link"
-import Typography from "@mui/joy/Typography"
 import { CssVarsProvider } from "@mui/joy/styles"
 import { Outlet } from "react-router-dom"
+import { useState } from "react"
 
 export default function MainPage() {
+    const [menu, setMenu] = useState("Transaction")
+    const updateMenu = (menuName) => {
+        if (menuName && menuName.length > 0) {
+            const captitalizeMenu = menuName.charAt(0).toUpperCase() + menuName.slice(1)
+            setMenu(captitalizeMenu)
+        }
+    }
     return (
         <CssVarsProvider disableTransitionOnChange>
             <CssBaseline />
             <Box sx={{ display: "flex", minHeight: "100dvh" }}>
                 <Header />
-                <Sidebar />
+                <Sidebar onChangeMenu={updateMenu} />
 
                 <Box
                     component="main"
@@ -38,22 +42,7 @@ export default function MainPage() {
                     }}
                 >
                     <Box sx={{ display: "flex", alignItems: "center" }}>
-                        <Breadcrumbs
-                            size="sm"
-                            aria-label="breadcrumbs"
-                            separator={<ChevronRightRoundedIcon fontSize="sm" />}
-                            sx={{ pl: 0 }}
-                        >
-                            <Link underline="none" color="neutral" href="#some-link" aria-label="Home">
-                                <HomeRoundedIcon />
-                            </Link>
-                            <Link underline="hover" color="neutral" href="#some-link" fontSize={12} fontWeight={500}>
-                                Dashboard
-                            </Link>
-                            <Typography color="primary" fontWeight={500} fontSize={12}>
-                                Transaction
-                            </Typography>
-                        </Breadcrumbs>
+                        <MainBreadcrumbs breadcrumbTexts={[menu]}></MainBreadcrumbs>
                     </Box>
                     <Outlet />
                 </Box>
