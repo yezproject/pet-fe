@@ -1,15 +1,17 @@
-import { Fragment, useState } from "react"
+import BasePagination from "@/common/base/BasePagination.jsx"
+import { thousandsNumber } from "@/common/constants/convert-number.js"
+import { minisToDate } from "@/common/constants/covert-time.js"
 import Box from "@mui/joy/Box"
-import Table from "@mui/joy/Table"
-import Sheet from "@mui/joy/Sheet"
 import Checkbox from "@mui/joy/Checkbox"
+import Sheet from "@mui/joy/Sheet"
+import Table from "@mui/joy/Table"
 import Typography from "@mui/joy/Typography"
 import PropTypes from "prop-types"
-import BasePagination from "@/common/base/BasePagination.jsx"
-import { minisToDate } from "@/common/constants/covert-time.js"
-import { thousandsNumber } from "@/common/constants/convert-number.js"
+import { Fragment, useState, memo } from "react"
 
-export default function TransactionList({ rows, isCheckbox = true, isRowMenu = true, isPagination = true, menu }) {
+export default memo(TransactionList)
+
+function TransactionList({ items, isCheckbox = true, isRowMenu = true, isPagination = true, menu }) {
     const [selected, setSelected] = useState([])
     const style = {
         overflow: "hidden",
@@ -47,16 +49,16 @@ export default function TransactionList({ rows, isCheckbox = true, isRowMenu = t
                                 <Checkbox
                                     size="sm"
                                     indeterminate={
-                                        selected.length > 0 && selected.length !== rows.length
+                                        selected.length > 0 && selected.length !== items.length
                                     }
-                                    checked={selected.length === rows.length}
+                                    checked={selected.length === items.length}
                                     onChange={(event) => {
                                         setSelected(
-                                            event.target.checked ? rows.map((row) => row.id) : [],
+                                            event.target.checked ? items.map((row) => row.id) : [],
                                         )
                                     }}
                                     color={
-                                        selected.length > 0 || selected.length === rows.length
+                                        selected.length > 0 || selected.length === items.length
                                             ? "primary"
                                             : undefined
                                     }
@@ -70,7 +72,7 @@ export default function TransactionList({ rows, isCheckbox = true, isRowMenu = t
                         </tr>
                     </thead>
                     <tbody>
-                        {rows.map((row) => (
+                        {items.map((row) => (
                             <tr key={row.id}>
                                 {isCheckbox && <td style={{ textAlign: "center", width: 48 }}>
                                     <Checkbox
@@ -124,6 +126,6 @@ export default function TransactionList({ rows, isCheckbox = true, isRowMenu = t
 }
 
 TransactionList.propTypes = {
-    rows: PropTypes.array.isRequired,
+    items: PropTypes.array.isRequired,
     isCheckbox: PropTypes.bool,
 }

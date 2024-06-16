@@ -9,22 +9,13 @@ import { useState } from "react"
 export default function AddTransactionsForm({ buttonText, onClickSubmit }) {
     const currentDate = new Date()
     const formattedDate = currentDate.toISOString().split("T")[0]
-    const [categoryId, setCategoryId] = useState("Default category Id")
     const [date, setDate] = useState(formattedDate)
 
     return (
         <form onSubmit={(event) => onClickSubmit(event)}>
-            <FormControl required>
-                <FormLabel>Category Id</FormLabel>
-                <Input
-                    type="text"
-                    name="categoryId"
-                    value={categoryId}
-                    onChange={(e) => setCategoryId(e.target.value)}
-                />
-            </FormControl>
+            
             <FormControl required sx={{ mt: 2 }}>
-                <FormLabel>Transaction Name</FormLabel>
+                <FormLabel>Name</FormLabel>
                 <Input type="text" name="name" />
             </FormControl>
             <FormControl required sx={{ mt: 2 }}>
@@ -35,6 +26,15 @@ export default function AddTransactionsForm({ buttonText, onClickSubmit }) {
                 <FormLabel>Date</FormLabel>
                 <Input type="date" name="transactionDate" value={date} onChange={(e) => setDate(e.target.value)} />
             </FormControl>
+            {/* <FormControl required>
+                <FormLabel>Category</FormLabel>
+                <Input
+                    type="text"
+                    name="categoryId"
+                    value={categoryId}
+                    onChange={(e) => setCategoryId(e.target.value)}
+                />
+            </FormControl> */}
             <Stack gap={4} sx={{ mt: 4 }}>
                 <Button type="submit">{buttonText}</Button>
             </Stack>

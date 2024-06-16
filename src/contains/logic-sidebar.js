@@ -6,7 +6,6 @@ export function openSidebar() {
 }
 
 export function closeSidebar() {
-    console.log("123")
     if (typeof window !== "undefined") {
         document.documentElement.style.removeProperty("--SideNavigation-slideIn")
         document.body.style.removeProperty("overflow")

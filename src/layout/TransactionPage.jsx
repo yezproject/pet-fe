@@ -8,7 +8,7 @@ import { dateToMinis } from "@/common/constants/covert-time.js"
 import AddTransactionsForm from "@/components/transaction/AddTransactionsForm.jsx"
 import { addTransaction, deleteTransactions, getTransactions } from "@/services/join-service.js"
 import { AddBox } from "@mui/icons-material"
-import { useEffect, useState } from "react"
+import { useEffect, useState, useCallback } from "react"
 import TransactionList from "@/components/transaction/TransactionList.jsx"
 import TransactionFilter from "@/components/transaction/TransactionFilter.jsx"
 
@@ -16,13 +16,15 @@ export default function TransactionPage() {
     const [transactions, setTransactions] = useState([])
     const [openModal, setOpenModal] = useState(false)
     const [selectedTransaction, setSelectedTransaction] = useState({})
-    const menuItems = (id) => [
+    
+    const menuItems = useCallback((id) => [
         { label: "Edit", action: () => handleEdit(id) },
-        { label: "Rename", action: () => console.log("Rename clicked") },
-        { label: "Move", action: () => console.log("Move clicked") },
         { label: "Delete", action: () => handleDelete(id) },
-    ]
-    const divider = ["Move"]
+    ], [])
+
+    const transactionAction = useCallback((id) => {
+        return <BaseMoreOption menuItems={menuItems(id)} divider={["Move"]} />
+    }, [])
 
     useEffect(() => {
         getTransactions().then((data) => {
@@ -54,7 +56,6 @@ export default function TransactionPage() {
 
     const handleDelete = async (itemId) => {
         const { status } = await deleteTransactions([itemId])
-        console.log(status)
     }
 
     const handleEdit = async (itemId) => {
@@ -84,8 +85,8 @@ export default function TransactionPage() {
             </Box>
             <TransactionFilter />
             <TransactionList
-                rows={transactions}
-                menu={(id) => <BaseMoreOption menuItems={menuItems(id)} divider={divider} />}
+                items={transactions}
+                menu={transactionAction}
             />
             <BaseModal
                 open={openModal}
