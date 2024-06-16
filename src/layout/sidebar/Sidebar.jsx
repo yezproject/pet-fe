@@ -3,7 +3,6 @@ import Avatar from "@mui/joy/Avatar"
 import Box from "@mui/joy/Box"
 import Button from "@mui/joy/Button"
 import Card from "@mui/joy/Card"
-import Chip from "@mui/joy/Chip"
 import Divider from "@mui/joy/Divider"
 import IconButton from "@mui/joy/IconButton"
 import Input from "@mui/joy/Input"
@@ -19,8 +18,6 @@ import SearchRoundedIcon from "@mui/icons-material/SearchRounded"
 import HomeRoundedIcon from "@mui/icons-material/HomeRounded"
 import DashboardRoundedIcon from "@mui/icons-material/DashboardRounded"
 import ShoppingCartRoundedIcon from "@mui/icons-material/ShoppingCartRounded"
-import AssignmentRoundedIcon from "@mui/icons-material/AssignmentRounded"
-import QuestionAnswerRoundedIcon from "@mui/icons-material/QuestionAnswerRounded"
 import GroupRoundedIcon from "@mui/icons-material/GroupRounded"
 import SupportRoundedIcon from "@mui/icons-material/SupportRounded"
 import SettingsRoundedIcon from "@mui/icons-material/SettingsRounded"
@@ -33,6 +30,7 @@ import { closeSidebar } from "@/contains/logic-sidebar.js"
 import BaseDarkMod from "@/common/base/BaseDarkMod.jsx"
 import { useAuth } from "@/common/auth/use-auth.jsx"
 import { Fragment, useState } from "react"
+import { CategoryRounded } from "@mui/icons-material"
 
 function Toggle({ defaultExpanded = false, renderToggle, children }) {
     const [open, setOpen] = useState(defaultExpanded)
@@ -152,15 +150,6 @@ export default function Sidebar() {
                     </ListItem>
 
                     <ListItem>
-                        <ListItemButton>
-                            <DashboardRoundedIcon />
-                            <ListItemContent>
-                                <Typography level="title-sm">Dashboard</Typography>
-                            </ListItemContent>
-                        </ListItemButton>
-                    </ListItem>
-
-                    <ListItem>
                         <ListItemButton selected>
                             <ShoppingCartRoundedIcon />
                             <ListItemContent>
@@ -169,48 +158,21 @@ export default function Sidebar() {
                         </ListItemButton>
                     </ListItem>
 
-                    <ListItem nested>
-                        <Toggle
-                            renderToggle={({ open, setOpen }) => (
-                                <ListItemButton onClick={() => setOpen(!open)}>
-                                    <AssignmentRoundedIcon />
-                                    <ListItemContent>
-                                        <Typography level="title-sm">Tasks</Typography>
-                                    </ListItemContent>
-                                    <KeyboardArrowDownIcon sx={{ transform: open ? "rotate(180deg)" : "none" }} />
-                                </ListItemButton>
-                            )}
-                        >
-                            <List sx={{ gap: 0.5 }}>
-                                <ListItem sx={{ mt: 0.5 }}>
-                                    <ListItemButton>All tasks</ListItemButton>
-                                </ListItem>
-                                <ListItem>
-                                    <ListItemButton>Backlog</ListItemButton>
-                                </ListItem>
-                                <ListItem>
-                                    <ListItemButton>In progress</ListItemButton>
-                                </ListItem>
-                                <ListItem>
-                                    <ListItemButton>Done</ListItemButton>
-                                </ListItem>
-                            </List>
-                        </Toggle>
+                    <ListItem>
+                        <ListItemButton>
+                            <CategoryRounded />
+                            <ListItemContent>
+                                <Typography level="title-sm">Category</Typography>
+                            </ListItemContent>
+                        </ListItemButton>
                     </ListItem>
 
                     <ListItem>
-                        <ListItemButton
-                            role="menuitem"
-                            component="a"
-                            href="/joy-ui/getting-started/templates/messages/"
-                        >
-                            <QuestionAnswerRoundedIcon />
+                        <ListItemButton>
+                            <DashboardRoundedIcon />
                             <ListItemContent>
-                                <Typography level="title-sm">Messages</Typography>
+                                <Typography level="title-sm">Report</Typography>
                             </ListItemContent>
-                            <Chip size="sm" color="primary" variant="solid">
-                                4
-                            </Chip>
                         </ListItemButton>
                     </ListItem>
 

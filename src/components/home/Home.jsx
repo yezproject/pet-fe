@@ -2,7 +2,7 @@ import { Box, Breadcrumbs, Link, Typography, Button } from "@mui/joy"
 import ChevronRightRoundedIcon from "@mui/icons-material/ChevronRightRounded"
 import HomeRoundedIcon from "@mui/icons-material/HomeRounded"
 import DownloadRoundedIcon from "@mui/icons-material/DownloadRounded"
-import BaseTable from "@/common/base/table/BaseTable.jsx"
+import TransactionList from "@/components/transaction/TransactionList.jsx"
 
 export default function Dashboard() {
     return (
@@ -72,7 +72,7 @@ export default function Dashboard() {
                     Download PDF
                 </Button>
             </Box>
-            <BaseTable />
+            <TransactionList />
             {/* <OrderList /> */}
         </Box>
     )

@@ -6,14 +6,14 @@ import Button from "@mui/joy/Button"
 
 import { useState } from "react"
 
-export default function TransactionsModal(props) {
+export default function AddTransactionsForm({ buttonText, onClickSubmit }) {
     const currentDate = new Date()
     const formattedDate = currentDate.toISOString().split("T")[0]
     const [categoryId, setCategoryId] = useState("Default category Id")
     const [date, setDate] = useState(formattedDate)
 
     return (
-        <form onSubmit={(event) => props.onClickSubmit(event)}>
+        <form onSubmit={(event) => onClickSubmit(event)}>
             <FormControl required>
                 <FormLabel>Category Id</FormLabel>
                 <Input
@@ -36,7 +36,7 @@ export default function TransactionsModal(props) {
                 <Input type="date" name="transactionDate" value={date} onChange={(e) => setDate(e.target.value)} />
             </FormControl>
             <Stack gap={4} sx={{ mt: 4 }}>
-                <Button type="submit">{props.buttonText}</Button>
+                <Button type="submit">{buttonText}</Button>
             </Stack>
         </form>
     )

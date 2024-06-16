@@ -1,4 +1,3 @@
-
 import ModalClose from "@mui/joy/ModalClose"
 import { Typography } from "@mui/joy"
 import Sheet from "@mui/joy/Sheet"
@@ -6,7 +5,7 @@ import Modal from "@mui/joy/Modal"
 import PropTypes from "prop-types"
 import Stack from "@mui/joy/Stack"
 
-export default function BaseModal({ title = "This is the modal title", body, open = false, setOpen }) {
+export default function BaseModal({ title = "Default", body, open = false, setOpen }) {
     return (
         <>
             <Modal

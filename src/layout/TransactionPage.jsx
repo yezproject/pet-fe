@@ -5,13 +5,14 @@ import Typography from "@mui/joy/Typography"
 import BaseMoreOption from "@/common/base/BaseMoreOption.jsx"
 import BaseModal from "@/common/base/modal/BaseModal.jsx"
 import { dateToMinis } from "@/common/constants/covert-time.js"
-import TransactionsModal from "@/components/order/TransactionsModal.jsx"
+import AddTransactionsForm from "@/components/transaction/AddTransactionsForm.jsx"
 import { addTransaction, deleteTransactions, getTransactions } from "@/services/join-service.js"
 import { AddBox } from "@mui/icons-material"
 import { useEffect, useState } from "react"
-import BaseTable from "@/common/base/table/BaseTable.jsx"
+import TransactionList from "@/components/transaction/TransactionList.jsx"
+import TransactionFilter from "@/components/transaction/TransactionFilter.jsx"
 
-export default function TransactionList() {
+export default function TransactionPage() {
     const [transactions, setTransactions] = useState([])
     const [openModal, setOpenModal] = useState(false)
     const [selectedTransaction, setSelectedTransaction] = useState({})
@@ -81,14 +82,15 @@ export default function TransactionList() {
                     Add transaction
                 </Button>
             </Box>
-            <BaseTable
+            <TransactionFilter />
+            <TransactionList
                 rows={transactions}
                 menu={(id) => <BaseMoreOption menuItems={menuItems(id)} divider={divider} />}
             />
             <BaseModal
                 open={openModal}
                 body={
-                    <TransactionsModal
+                    <AddTransactionsForm
                         buttonText={"Add transaction"}
                         transaction={setSelectedTransaction}
                         onClickSubmit={(event) => onAddTransactions(event)}

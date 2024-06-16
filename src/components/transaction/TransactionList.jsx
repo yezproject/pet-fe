@@ -1,17 +1,15 @@
-
-import {Fragment, useState} from "react"
+import { Fragment, useState } from "react"
 import Box from "@mui/joy/Box"
 import Table from "@mui/joy/Table"
 import Sheet from "@mui/joy/Sheet"
 import Checkbox from "@mui/joy/Checkbox"
 import Typography from "@mui/joy/Typography"
-import BaseTableFilters from "@/common/base/table/BaseTableFilters.jsx"
 import PropTypes from "prop-types"
 import BasePagination from "@/common/base/BasePagination.jsx"
-import {minisToDate} from "@/common/constants/covert-time.js"
-import {thousandsNumber} from "@/common/constants/convert-number.js"
+import { minisToDate } from "@/common/constants/covert-time.js"
+import { thousandsNumber } from "@/common/constants/convert-number.js"
 
-export default function BaseTable({rows, isCheckbox = true, isRowMenu = true, isPagination = true, menu}) {
+export default function TransactionList({ rows, isCheckbox = true, isRowMenu = true, isPagination = true, menu }) {
     const [selected, setSelected] = useState([])
     const style = {
         overflow: "hidden",
@@ -22,11 +20,10 @@ export default function BaseTable({rows, isCheckbox = true, isRowMenu = true, is
 
     return (
         <Fragment>
-            <BaseTableFilters />
             <Sheet className="OrderTableContainer"
                 variant="outlined"
                 sx={{
-                    display: {xs: "none", sm: "initial"},
+                    display: { xs: "none", sm: "initial" },
                     width: "100%",
                     borderRadius: "sm",
                     flexShrink: 1,
@@ -46,7 +43,7 @@ export default function BaseTable({rows, isCheckbox = true, isRowMenu = true, is
                     }}>
                     <thead>
                         <tr>
-                            {isCheckbox && <th style={{width: 48, textAlign: "center", padding: "12px 6px"}}>
+                            {isCheckbox && <th style={{ width: 48, textAlign: "center", padding: "12px 6px" }}>
                                 <Checkbox
                                     size="sm"
                                     indeterminate={
@@ -63,20 +60,19 @@ export default function BaseTable({rows, isCheckbox = true, isRowMenu = true, is
                                             ? "primary"
                                             : undefined
                                     }
-                                    sx={{verticalAlign: "text-bottom"}}/>
+                                    sx={{ verticalAlign: "text-bottom" }} />
                             </th>}
-                            <th style={{width: 100, padding: "12px 6px"}}>Name</th>
-                            <th style={{width: 80, padding: "12px 6px"}}>Date</th>
-                            <th style={{width: 100, padding: "12px 6px"}}>Id</th>
-                            <th style={{width: 100, padding: "12px 6px"}}>Category Id</th>
-                            <th style={{width: 60, padding: "12px 6px"}}>Amount</th>
-                            {isRowMenu && <th style={{width: 30, padding: "12px 6px"}}></th>}
+                            <th style={{ width: 100, padding: "12px 6px" }}>Name</th>
+                            <th style={{ width: 80, padding: "12px 6px" }}>Transaction time</th>
+                            <th style={{ width: 100, padding: "12px 6px" }}>Category</th>
+                            <th style={{ width: 60, padding: "12px 6px" }}>Amount</th>
+                            {isRowMenu && <th style={{ width: 30, padding: "12px 6px" }}></th>}
                         </tr>
                     </thead>
                     <tbody>
                         {rows.map((row) => (
                             <tr key={row.id}>
-                                {isCheckbox && <td style={{textAlign: "center", width: 120}}>
+                                {isCheckbox && <td style={{ textAlign: "center", width: 48 }}>
                                     <Checkbox
                                         size="sm"
                                         checked={selected.includes(row.id)}
@@ -88,8 +84,8 @@ export default function BaseTable({rows, isCheckbox = true, isRowMenu = true, is
                                                     : ids.filter((itemId) => itemId !== row.id),
                                             )
                                         }}
-                                        slotProps={{checkbox: {sx: {textAlign: "left"}}}}
-                                        sx={{verticalAlign: "text-bottom"}}
+                                        slotProps={{ checkbox: { sx: { textAlign: "left" } } }}
+                                        sx={{ verticalAlign: "text-bottom" }}
                                     />
                                 </td>}
                                 <td>
@@ -105,13 +101,6 @@ export default function BaseTable({rows, isCheckbox = true, isRowMenu = true, is
                                 <td>
                                     <Typography style={style}
                                         level="body-xs"
-                                        title={row.id}>
-                                        {row.id}
-                                    </Typography>
-                                </td>
-                                <td>
-                                    <Typography style={style}
-                                        level="body-xs"
                                         title={row.categoryId}>
                                         {row.categoryId}
                                     </Typography>
@@ -120,7 +109,7 @@ export default function BaseTable({rows, isCheckbox = true, isRowMenu = true, is
                                     <Typography level="body-xs">{thousandsNumber(row.amount)}</Typography>
                                 </td>
                                 {isRowMenu && <td>
-                                    <Box sx={{display: "flex", gap: 2, alignItems: "center"}}>
+                                    <Box sx={{ display: "flex", gap: 2, alignItems: "center" }}>
                                         {menu(row.id)}
                                     </Box>
                                 </td>}
@@ -129,12 +118,12 @@ export default function BaseTable({rows, isCheckbox = true, isRowMenu = true, is
                     </tbody>
                 </Table>
             </Sheet>
-            {isPagination && <BasePagination/>}
+            {isPagination && <BasePagination />}
         </Fragment>
     )
 }
 
-BaseTable.propTypes = {
+TransactionList.propTypes = {
     rows: PropTypes.array.isRequired,
     isCheckbox: PropTypes.bool,
 }
