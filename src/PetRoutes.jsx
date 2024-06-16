@@ -6,7 +6,7 @@ import SignUpForm from "@/components/login/SignUpForm.jsx"
 import SignInForm from "@/components/login/SignInForm.jsx"
 import TransactionPage from "@/layout/TransactionPage.jsx"
 import Profile from "@/components/profile/Profile.jsx"
-import Dashboard from "@/components/dashboard/Dashboard.jsx"
+import HomePage from "@/layout/HomePage.jsx"
 import ErrorPage from "@/layout/ErrorPage.jsx"
 
 export default function PetRoutes() {
@@ -20,9 +20,9 @@ export default function PetRoutes() {
             <Route path="/error" element={<ErrorPage />} />
             <Route path="/" element={<MainPage />}>
                 <Route index element={<Navigate to="/transaction" replace />} />
+                <Route path="home" element={<HomePage />} />
                 <Route path="transaction" element={<TransactionPage />} />
                 <Route path="profile" element={<Profile />} />
-                <Route path="dashboard" element={<Dashboard />} />
                 <Route path="*" element={<Navigate to="/transaction" replace />} />
             </Route>
             {/*<Route path="/*" element={<Navigate to="/" />} />*/}

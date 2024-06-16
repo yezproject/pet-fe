@@ -1,9 +1,20 @@
-import GlobalStyles from "@mui/joy/GlobalStyles"
+import BrightnessAutoRoundedIcon from "@mui/icons-material/BrightnessAutoRounded"
+import CloseRoundedIcon from "@mui/icons-material/CloseRounded"
+import DashboardRoundedIcon from "@mui/icons-material/DashboardRounded"
+import GroupRoundedIcon from "@mui/icons-material/GroupRounded"
+import HomeRoundedIcon from "@mui/icons-material/HomeRounded"
+import KeyboardArrowDownIcon from "@mui/icons-material/KeyboardArrowDown"
+import LogoutRoundedIcon from "@mui/icons-material/LogoutRounded"
+import SearchRoundedIcon from "@mui/icons-material/SearchRounded"
+import SettingsRoundedIcon from "@mui/icons-material/SettingsRounded"
+import ShoppingCartRoundedIcon from "@mui/icons-material/ShoppingCartRounded"
+import SupportRoundedIcon from "@mui/icons-material/SupportRounded"
 import Avatar from "@mui/joy/Avatar"
 import Box from "@mui/joy/Box"
 import Button from "@mui/joy/Button"
 import Card from "@mui/joy/Card"
 import Divider from "@mui/joy/Divider"
+import GlobalStyles from "@mui/joy/GlobalStyles"
 import IconButton from "@mui/joy/IconButton"
 import Input from "@mui/joy/Input"
 import LinearProgress from "@mui/joy/LinearProgress"
@@ -11,26 +22,18 @@ import List from "@mui/joy/List"
 import ListItem from "@mui/joy/ListItem"
 import ListItemButton, { listItemButtonClasses } from "@mui/joy/ListItemButton"
 import ListItemContent from "@mui/joy/ListItemContent"
-import Typography from "@mui/joy/Typography"
 import Sheet from "@mui/joy/Sheet"
 import Stack from "@mui/joy/Stack"
-import SearchRoundedIcon from "@mui/icons-material/SearchRounded"
-import HomeRoundedIcon from "@mui/icons-material/HomeRounded"
-import DashboardRoundedIcon from "@mui/icons-material/DashboardRounded"
-import ShoppingCartRoundedIcon from "@mui/icons-material/ShoppingCartRounded"
-import GroupRoundedIcon from "@mui/icons-material/GroupRounded"
-import SupportRoundedIcon from "@mui/icons-material/SupportRounded"
-import SettingsRoundedIcon from "@mui/icons-material/SettingsRounded"
-import CloseRoundedIcon from "@mui/icons-material/CloseRounded"
-import LogoutRoundedIcon from "@mui/icons-material/LogoutRounded"
-import BrightnessAutoRoundedIcon from "@mui/icons-material/BrightnessAutoRounded"
-import KeyboardArrowDownIcon from "@mui/icons-material/KeyboardArrowDown"
+import Typography from "@mui/joy/Typography"
 
-import { closeSidebar } from "@/contains/logic-sidebar.js"
-import BaseDarkMod from "@/common/base/BaseDarkMod.jsx"
 import { useAuth } from "@/common/auth/use-auth.jsx"
-import { Fragment, useState } from "react"
+import BaseDarkMod from "@/common/base/BaseDarkMod.jsx"
+import { closeSidebar } from "@/contains/logic-sidebar.js"
 import { CategoryRounded } from "@mui/icons-material"
+import Link from "@mui/joy/Link"
+import { Fragment, useEffect, useState } from "react"
+import { Link as RouterLink, useNavigate } from "react-router-dom"
+
 
 function Toggle({ defaultExpanded = false, renderToggle, children }) {
     const [open, setOpen] = useState(defaultExpanded)
@@ -54,7 +57,12 @@ function Toggle({ defaultExpanded = false, renderToggle, children }) {
 }
 
 export default function Sidebar() {
+    const navigate = useNavigate()
+    const [selectedMenu, setSelectedMenu] = useState("transaction")
     const { logout } = useAuth()
+    const navigatePage = useEffect(() => {
+        navigate(`/${selectedMenu}`)
+    }, [selectedMenu])
 
     const onClickLogout = () => {
         logout()
@@ -141,7 +149,7 @@ export default function Sidebar() {
                     }}
                 >
                     <ListItem>
-                        <ListItemButton>
+                        <ListItemButton selected={selectedMenu === "home"} onClick={() => setSelectedMenu("home")}>
                             <HomeRoundedIcon />
                             <ListItemContent>
                                 <Typography level="title-sm">Home</Typography>
@@ -150,7 +158,7 @@ export default function Sidebar() {
                     </ListItem>
 
                     <ListItem>
-                        <ListItemButton selected>
+                        <ListItemButton selected={selectedMenu === "transaction"} onClick={() => setSelectedMenu("transaction")}>
                             <ShoppingCartRoundedIcon />
                             <ListItemContent>
                                 <Typography level="title-sm">Transaction</Typography>
@@ -159,7 +167,7 @@ export default function Sidebar() {
                     </ListItem>
 
                     <ListItem>
-                        <ListItemButton>
+                        <ListItemButton selected={selectedMenu === "category"} onClick={() => setSelectedMenu("category")}>
                             <CategoryRounded />
                             <ListItemContent>
                                 <Typography level="title-sm">Category</Typography>
@@ -168,7 +176,7 @@ export default function Sidebar() {
                     </ListItem>
 
                     <ListItem>
-                        <ListItemButton>
+                        <ListItemButton selected={selectedMenu === "report"} onClick={() => setSelectedMenu("report")}>
                             <DashboardRoundedIcon />
                             <ListItemContent>
                                 <Typography level="title-sm">Report</Typography>

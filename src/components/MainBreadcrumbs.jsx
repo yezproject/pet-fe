@@ -19,7 +19,7 @@ export default function MainBreadcrumbs({ breadcrumbTexts }) {
                 <HomeRoundedIcon />
             </Link>
             {breadcrumbTexts.map((text, index) => (
-                <Link
+                <Link key={text}
                     underline="hover"
                     color="neutral"
                     href="#some-link"

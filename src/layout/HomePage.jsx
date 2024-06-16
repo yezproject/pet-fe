@@ -2,7 +2,7 @@ import { Box, Typography } from "@mui/joy"
 
 import MainBreadcrumbs from "@/components/MainBreadcrumbs"
 
-export default function Dashboard() {
+export default function Home() {
     return (
         <Box
             component="main"
