@@ -13,7 +13,7 @@ export const AuthProvider = ({ children }) => {
 
     const logout = () => {
         clearToken(null)
-        navigate("/", { replace: true })
+        navigate("/auth/sign-in", { replace: true })
     }
 
     const cacheUser = async (data, remember) => {

@@ -1,13 +1,14 @@
-import { Navigate, Route, Routes } from "react-router-dom"
-import AuthenticationPage from "@/layout/authentication/AuthenticationPage.jsx"
-import NotFoundPage from "@/layout/NotFoundPage.jsx"
-import MainPage from "@/layout/MainPage.jsx"
-import SignUpForm from "@/components/login/SignUpForm.jsx"
 import SignInForm from "@/components/login/SignInForm.jsx"
-import TransactionPage from "@/layout/TransactionPage.jsx"
+import SignUpForm from "@/components/login/SignUpForm.jsx"
 import Profile from "@/components/profile/Profile.jsx"
-import HomePage from "@/layout/HomePage.jsx"
 import ErrorPage from "@/layout/ErrorPage.jsx"
+import HomePage from "@/layout/HomePage.jsx"
+import MainPage from "@/layout/MainPage.jsx"
+import NotFoundPage from "@/layout/NotFoundPage.jsx"
+import TransactionPage from "@/layout/TransactionPage.jsx"
+import AuthenticationPage from "@/layout/authentication/AuthenticationPage.jsx"
+import React from "react"
+import { Navigate, Route, Routes } from "react-router-dom"
 
 export default function PetRoutes() {
     return (

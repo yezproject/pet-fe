@@ -85,7 +85,7 @@ export default function TransactionPage() {
             </Box>
             <TransactionFilter />
             <TransactionList
-                items={transactions}
+                transactions={transactions}
                 menu={transactionAction}
             />
             <BaseModal

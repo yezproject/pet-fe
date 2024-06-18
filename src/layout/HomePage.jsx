@@ -1,13 +1,17 @@
 import { Box, Typography } from "@mui/joy"
 
-import MainBreadcrumbs from "@/components/MainBreadcrumbs"
 import Chart from "react-apexcharts"
 
 export default function Home() {
+    console.log("already load home")
     const state = {
         options: {},
-        series: [44, 55, 41, 17, 15],
-        labels: ["A", "B", "C", "D", "E"]
+        series: [
+            {
+                name: "",
+                data: [[1324508400000, 34], [1324594800000, 54], [1326236400000, 43]]
+            }
+        ]
     }
 
     return (
@@ -28,10 +32,13 @@ export default function Home() {
                 </Typography>
             </Box>
 
-            <Box>
-                <div className="donut">
-                    <Chart options={state.options} series={state.series} type="donut" width="380" />
-                </div>
+            <Box
+                height={400}
+                width={500}
+                sx={{
+                    border: "1px solid"
+                }}>
+                <Chart options={state.options} series={state.series} type="line" width="380" />
             </Box>
         </Box>
     )
