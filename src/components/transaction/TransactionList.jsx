@@ -1,6 +1,6 @@
 import BaseTable from "@/common/base/table/BaseTable"
 import { thousandsNumber } from "@/common/constants/convert-number.js"
-import { minisToDate } from "@/common/constants/covert-time.js"
+import { millisToDate } from "@/common/utils/time-utils.js"
 import Box from "@mui/joy/Box"
 import Typography from "@mui/joy/Typography"
 import PropTypes from "prop-types"
@@ -12,7 +12,8 @@ function TransactionList({ transactions, menu }) {
     const style = {
         overflow: "hidden",
         textOverflow: "ellipsis",
-        whiteSpace: "nowrap"
+        whiteSpace: "nowrap",
+        
     }
 
     const columns = [
@@ -29,7 +30,7 @@ function TransactionList({ transactions, menu }) {
         {
             name: "Transaction time",
             valueGetter: (row) => (
-                <Typography level="body-xs">{minisToDate(row.transactionDate)}</Typography>
+                <Typography level="body-xs">{millisToDate(row.transactionDate)}</Typography>
             )
         },
         {
@@ -52,7 +53,7 @@ function TransactionList({ transactions, menu }) {
             name: "Action",
             valueGetter: (row) => (
                 <Box sx={{ display: "flex", gap: 2, alignItems: "center" }}>
-                    {menu(row.id)}
+                    {menu(row)}
                 </Box>
             )
         }

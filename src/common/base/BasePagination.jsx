@@ -1,7 +1,6 @@
-
 import Box from "@mui/joy/Box"
 import Button from "@mui/joy/Button"
-import IconButton, {iconButtonClasses} from "@mui/joy/IconButton"
+import IconButton, { iconButtonClasses } from "@mui/joy/IconButton"
 import KeyboardArrowRightIcon from "@mui/icons-material/KeyboardArrowRight"
 import KeyboardArrowLeftIcon from "@mui/icons-material/KeyboardArrowLeft"
 

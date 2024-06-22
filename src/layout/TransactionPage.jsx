@@ -4,63 +4,65 @@ import Typography from "@mui/joy/Typography"
 
 import BaseMoreOption from "@/common/base/BaseMoreOption.jsx"
 import BaseModal from "@/common/base/modal/BaseModal.jsx"
-import { dateToMinis } from "@/common/constants/covert-time.js"
-import AddTransactionsForm from "@/components/transaction/AddTransactionsForm.jsx"
-import { addTransaction, deleteTransactions, getTransactions } from "@/services/join-service.js"
-import { AddBox } from "@mui/icons-material"
-import { useEffect, useState, useCallback } from "react"
-import TransactionList from "@/components/transaction/TransactionList.jsx"
+import AddTransactionForm from "@/components/transaction/AddTransactionForm.jsx"
+import ModifyTransactionForm from "@/components/transaction/ModifyTransactionForm.jsx"
 import TransactionFilter from "@/components/transaction/TransactionFilter.jsx"
+import TransactionList from "@/components/transaction/TransactionList.jsx"
+import { addTransaction, deleteTransactions, getTransactions, updateTransaction } from "@/services/join-service.js"
+import { AddBox } from "@mui/icons-material"
+import { useCallback, useEffect, useState } from "react"
 
 export default function TransactionPage() {
     const [transactions, setTransactions] = useState([])
-    const [openModal, setOpenModal] = useState(false)
+    const [openAddModal, setOpenAddModal] = useState(false)
+    const [openModifyModal, setOpenModifyModal] = useState(false)
     const [selectedTransaction, setSelectedTransaction] = useState({})
-    
-    const menuItems = useCallback((id) => [
-        { label: "Edit", action: () => handleEdit(id) },
-        { label: "Delete", action: () => handleDelete(id) },
+
+    const menuItems = useCallback((row) => [
+        { label: "Edit", action: () => handleEdit(row) },
+        { label: "Delete", action: () => handleDelete(row.id) },
     ], [])
 
     const transactionAction = useCallback((id) => {
         return <BaseMoreOption menuItems={menuItems(id)} divider={["Move"]} />
     }, [])
 
-    useEffect(() => {
-        getTransactions().then((data) => {
-            setTransactions(data.data)
+    const fetchTransactions = () => {
+        getTransactions().then((response) => {
+            setTransactions(response.data)
         })
+    }
+
+    useEffect(() => {
+        fetchTransactions()
     }, [])
 
-    const onAddTransactions = async (e) => {
-        e.preventDefault()
-        const formElements = e.currentTarget.elements
-        const formData = {
-            categoryId: formElements.categoryId.value,
-            name: formElements.name.value,
-            amount: formElements.amount.value,
-            transactionDate: dateToMinis(formElements.transactionDate.value),
-        }
-        const { data, status } = await addTransaction(formData)
+    const onAddTransaction = async (newTransaction) => {
+        const { status } = await addTransaction(newTransaction)
         if (status === 201) {
-            setTransactions([
-                ...transactions,
-                {
-                    ...formData,
-                    id: data.id,
-                },
-            ])
-            setOpenModal(false)
+            fetchTransactions()
+            setOpenAddModal(false)
+        }
+    }
+
+    const onModifyTransaction = async (modifiedTransaction) => {
+        const { status } = await updateTransaction(modifiedTransaction.id, modifiedTransaction)
+        if (status === 204) {
+            fetchTransactions()
+            setOpenModifyModal(false)
         }
     }
 
     const handleDelete = async (itemId) => {
         const { status } = await deleteTransactions([itemId])
+        if (status === 204) {
+            setTransactions(transactions => transactions.filter(it => it.id !== itemId))
+        }
     }
 
-    const handleEdit = async (itemId) => {
-        setSelectedTransaction(transactions.filter((item) => item.id === itemId))
-        setOpenModal(true)
+    const handleEdit = async (transaction) => {
+        setSelectedTransaction(transaction)
+        setOpenModifyModal(true)
     }
 
     return (
@@ -79,7 +81,7 @@ export default function TransactionPage() {
                 <Typography level="h2" component="h1">
                     Transaction
                 </Typography>
-                <Button color="primary" startDecorator={<AddBox />} size="sm" onClick={() => setOpenModal(true)}>
+                <Button color="primary" startDecorator={<AddBox />} size="sm" onClick={() => setOpenAddModal(true)}>
                     Add transaction
                 </Button>
             </Box>
@@ -89,16 +91,25 @@ export default function TransactionPage() {
                 menu={transactionAction}
             />
             <BaseModal
-                open={openModal}
+                open={openAddModal}
                 body={
-                    <AddTransactionsForm
-                        buttonText={"Add transaction"}
-                        transaction={setSelectedTransaction}
-                        onClickSubmit={(event) => onAddTransactions(event)}
+                    <AddTransactionForm
+                        addTransaction={(transaction) => onAddTransaction(transaction)}
                     />
                 }
                 title={"Add transaction"}
-                setOpen={() => setOpenModal(false)}
+                onClose={() => setOpenAddModal(false)}
+            />
+            <BaseModal
+                open={openModifyModal}
+                body={
+                    <ModifyTransactionForm
+                        transaction={selectedTransaction}
+                        modifyTransaction={(transaction) => onModifyTransaction(transaction)}
+                    />
+                }
+                title={"Update transaction"}
+                onClose={() => setOpenModifyModal(false)}
             />
         </Box>
     )

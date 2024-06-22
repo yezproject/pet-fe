@@ -5,14 +5,14 @@ import Modal from "@mui/joy/Modal"
 import PropTypes from "prop-types"
 import Stack from "@mui/joy/Stack"
 
-export default function BaseModal({ title = "Default", body, open = false, setOpen }) {
+export default function BaseModal({ title = "Default", body, open = false, onClose }) {
     return (
         <>
             <Modal
                 aria-labelledby="modal-title"
                 aria-describedby="modal-desc"
                 open={open}
-                onClose={setOpen}
+                onClose={onClose}
                 sx={{ display: "flex", justifyContent: "center", alignItems: "center", zIndex: 10000 }}
             >
                 <Sheet

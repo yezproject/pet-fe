@@ -1,14 +1,23 @@
-function dateToMinis(date) {
+function dateToMillis(date) {
     const ms = new Date(date)
     return ms.getTime()
 }
 
-function minisToDate(ms) {
+function millisToDate(ms) {
     const date = new Date(ms)
-    const year = date.getFullYear()
-    const month = String(date.getMonth() + 1).padStart(2, "0")
-    const day = String(date.getDate()).padStart(2, "0")
-    return `${day}/${month}/${year}`
+    
+    const formatter = new Intl.DateTimeFormat("vi-VN", {
+        day: "2-digit",
+        month: "2-digit",
+        year: "numeric",
+        hour: "2-digit",
+        minute: "2-digit",
+        second: "2-digit",
+        hour12: false
+    })
+  
+    return formatter.format(date)
 }
 
-export { dateToMinis, minisToDate }
+export { dateToMillis, millisToDate }
+
