@@ -2,7 +2,7 @@ import Box from "@mui/joy/Box"
 import Button from "@mui/joy/Button"
 import Stack from "@mui/joy/Stack"
 
-import TextInput from "@/common/base/form/TextInput.jsx"
+import BaseTextInput from "@/common/base/form/BaseTextInput.jsx"
 import { useForm } from "react-hook-form"
 
 export default function UpdateCategoryForm({ category, updateCategory }) {
@@ -23,7 +23,7 @@ export default function UpdateCategoryForm({ category, updateCategory }) {
     return (
         <form onSubmit={handleSubmit(onSubmit)}>
             <Box>
-                <TextInput
+                <BaseTextInput
                     control={control}
                     name="name"
                     label="Name"

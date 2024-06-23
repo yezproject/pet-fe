@@ -2,7 +2,7 @@ import FormLabel from "@mui/joy/FormLabel"
 import Input from "@mui/joy/Input"
 import { useController } from "react-hook-form"
 
-const DateInput = ({ control, name, label }) => {
+const BaseTextInput = ({ control, name, label }) => {
     const { field } = useController({
         name,
         control
@@ -10,9 +10,9 @@ const DateInput = ({ control, name, label }) => {
     return (
         <>
             <FormLabel sx={{ mb: 1 }}>{label}</FormLabel>
-            <Input type="date" {...field} />
+            <Input type="text" {...field}/>
         </>
     )
 }
 
-export default DateInput
+export default BaseTextInput

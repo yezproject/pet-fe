@@ -2,7 +2,7 @@ import FormLabel from "@mui/joy/FormLabel"
 import Input from "@mui/joy/Input"
 import { useController } from "react-hook-form"
 
-const TextInput = ({ control, name, label }) => {
+const BaseTimeInput = ({ control, name, label }) => {
     const { field } = useController({
         name,
         control
@@ -10,9 +10,9 @@ const TextInput = ({ control, name, label }) => {
     return (
         <>
             <FormLabel sx={{ mb: 1 }}>{label}</FormLabel>
-            <Input type="text" {...field}/>
+            <Input type="time" {...field} />
         </>
     )
 }
 
-export default TextInput
+export default BaseTimeInput

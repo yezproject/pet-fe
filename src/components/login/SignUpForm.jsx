@@ -9,7 +9,7 @@ import Link from "@mui/joy/Link"
 import GoogleIcon from "@/common/icon/GoogleIcon.jsx"
 import Divider from "@mui/joy/Divider"
 import { useNavigate } from "react-router-dom"
-import { signUp } from "@/services/join-service.js"
+import joinService from "@/services/join-service.js"
 import Snackbar from "@mui/joy/Snackbar"
 
 export default function SignUpForm(props) {
@@ -37,7 +37,7 @@ export default function SignUpForm(props) {
                 email: formElements.email.value,
                 password: formElements.password.value,
             }
-            const { status } = await signUp(formData)
+            const { status } = await joinService.signUp(formData)
             setErrorUser(status !== 201)
             if (status === 201) {
                 toSignIn()
@@ -61,9 +61,9 @@ export default function SignUpForm(props) {
                     </Typography>
                 </Stack>
                 <Button variant="soft"
-                        color="neutral"
-                        fullWidth
-                        startDecorator={<GoogleIcon />}>
+                    color="neutral"
+                    fullWidth
+                    startDecorator={<GoogleIcon />}>
                     Continue with Google
                 </Button>
             </Stack>

@@ -3,10 +3,10 @@ import Button from "@mui/joy/Button"
 import Grid from "@mui/joy/Grid"
 import Stack from "@mui/joy/Stack"
 
-import AmountMoneyInput from "@/common/base/form/AmountMoneyInput"
-import DateInput from "@/common/base/form/DateInput"
-import TextInput from "@/common/base/form/TextInput.jsx"
-import TimeInput from "@/common/base/form/TimeInput"
+import BaseAmountMoneyInput from "@/common/base/form/BaseAmountMoneyInput"
+import BaseDateInput from "@/common/base/form/BaseDateInput"
+import BaseTextInput from "@/common/base/form/BaseTextInput.jsx"
+import BaseTimeInput from "@/common/base/form/BaseTimeInput"
 import { dateToMillis, dateToString, timeToString } from "@/common/utils/time-utils.js"
 import { useForm } from "react-hook-form"
 
@@ -33,14 +33,14 @@ export default function ModifyTransactionForm({ transaction, modifyTransaction }
     return (
         <form onSubmit={handleSubmit(onSubmit)}>
             <Box>
-                <TextInput
+                <BaseTextInput
                     control={control}
                     name="name"
                     label="Name"
                 />
             </Box>
             <Box sx={{ mt: 2 }}>
-                <AmountMoneyInput
+                <BaseAmountMoneyInput
                     control={control}
                     name="amount"
                     label="Amount of money"
@@ -49,14 +49,14 @@ export default function ModifyTransactionForm({ transaction, modifyTransaction }
 
             <Grid container spacing={2} sx={{ flexGrow: 1, mt: 1, mb: 1 }}>
                 <Grid xs>
-                    <DateInput
+                    <BaseDateInput
                         control={control}
                         name="date"
                         label="Date"
                     />
                 </Grid>
                 <Grid xs>
-                    <TimeInput
+                    <BaseTimeInput
                         control={control}
                         name="time"
                         label="Time"

@@ -1,11 +1,11 @@
-import NumericFormatAdapter from "@/common/base/form/NumericFormatAdapter"
+import BaseNumericFormatAdapter from "@/common/base/form/BaseNumericFormatAdapter"
 import FormLabel from "@mui/joy/FormLabel"
 import Input from "@mui/joy/Input"
 import * as React from "react"
 
 import { useController } from "react-hook-form"
 
-export default function AmountMoneyInput({ control, name, label }) {
+export default function BaseAmountMoneyInput({ control, name, label }) {
     const { field } = useController({
         name,
         control
@@ -17,7 +17,7 @@ export default function AmountMoneyInput({ control, name, label }) {
                 endDecorator="₫"
                 slotProps={{
                     input: {
-                        component: NumericFormatAdapter,
+                        component: BaseNumericFormatAdapter,
                     },
                 }} />
         </>

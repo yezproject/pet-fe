@@ -7,7 +7,7 @@ import FormLabel from "@mui/joy/FormLabel"
 import Link from "@mui/joy/Link"
 import Input from "@mui/joy/Input"
 import Stack from "@mui/joy/Stack"
-import { signIn } from "@/services/join-service.js"
+import joinService from "@/services/join-service.js"
 import { useAuth } from "@/common/auth/use-auth.jsx"
 import { getUser } from "@/common/storage/local-storage.js"
 import { useNavigate } from "react-router-dom"
@@ -31,7 +31,7 @@ export default function SignInForm() {
             email: formElements.email.value,
             password: formElements.password.value,
         }
-        const { data, status } = await signIn(formData)
+        const { data, status } = await joinService.signIn(formData)
         if (status === 200) {
             await Promise.all([login(data.token), cacheUser(formData, getRememberMe)])
         } else {
@@ -79,9 +79,9 @@ export default function SignInForm() {
                     </Typography>
                 </Stack>
                 <Button variant="soft"
-                        color="neutral"
-                        fullWidth
-                        startDecorator={<GoogleIcon />}>
+                    color="neutral"
+                    fullWidth
+                    startDecorator={<GoogleIcon />}>
                     Continue with Google
                 </Button>
             </Stack>
@@ -99,12 +99,12 @@ export default function SignInForm() {
                     <FormControl required error={getErrorUser}>
                         <FormLabel>Email</FormLabel>
                         <Input type="email" name="email" value={getCacheUser}
-                               onChange={event => onChangeUser(event)} />
+                            onChange={event => onChangeUser(event)} />
                     </FormControl>
                     <FormControl required error={getErrorPassword}>
                         <FormLabel>Password</FormLabel>
                         <Input type="password" name="password" value={getCachePassword}
-                               onChange={event => onChangePassword(event)} />
+                            onChange={event => onChangePassword(event)} />
                     </FormControl>
                     <Stack gap={4} sx={{ mt: 2 }}>
                         <Box
