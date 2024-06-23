@@ -1,4 +1,5 @@
 import HTTP from "@/services/base-api-service.js"
+import useCategoryState from "@/state/use-category"
 
 function getCategories() {
     return HTTP.get("categories")
@@ -20,9 +21,17 @@ function deleteCategory(categoryId) {
     return HTTP.delete(`categories/${categoryId}`)
 }
 
-export default class CategoryService {
-    static getCategories = getCategories
-    static addCategory = addCategory
-    static updateCategory = updateCategory
-    static deleteCategory = deleteCategory
+const categoryService = {
+    getCategories: async () => {
+        const res = await getCategories()
+        if(res?.data) {
+            useCategoryState.getState().setCategories(res.data)
+        }
+        return res
+    },
+    addCategory,
+    updateCategory,
+    deleteCategory,
 }
+
+export default categoryService

@@ -13,7 +13,7 @@ export default function BaseModal({ title = "Default", body, open = false, onClo
                 aria-describedby="modal-desc"
                 open={open}
                 onClose={onClose}
-                sx={{ display: "flex", justifyContent: "center", alignItems: "center", zIndex: 10000 }}
+                sx={{ display: "flex", justifyContent: "center", alignItems: "center" }}
             >
                 <Sheet
                     variant="outlined"

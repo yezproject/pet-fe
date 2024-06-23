@@ -88,7 +88,7 @@ export default function Sidebar({ onChangeMenu }) {
                     md: "none",
                 },
                 transition: "transform 0.4s, width 0.4s",
-                zIndex: 10000,
+                zIndex: 1,
                 height: "100dvh",
                 width: "var(--Sidebar-width)",
                 top: 0,
@@ -185,14 +185,14 @@ export default function Sidebar({ onChangeMenu }) {
                         </ListItemButton>
                     </ListItem>
 
-                    <ListItem>
+                    {/* <ListItem>
                         <ListItemButton selected={selectedMenu === "report"} onClick={() => navigateTo("report")}>
                             <DashboardRoundedIcon />
                             <ListItemContent>
                                 <Typography level="title-sm">Report</Typography>
                             </ListItemContent>
                         </ListItemButton>
-                    </ListItem>
+                    </ListItem> */}
 
                     <ListItem nested>
                         <Toggle
