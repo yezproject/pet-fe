@@ -6,6 +6,7 @@ import HomePage from "@/layout/HomePage.jsx"
 import MainPage from "@/layout/MainPage.jsx"
 import NotFoundPage from "@/layout/NotFoundPage.jsx"
 import TransactionPage from "@/layout/TransactionPage.jsx"
+import CategoryPage from "@/layout/CategoryPage.jsx"
 import AuthenticationPage from "@/layout/authentication/AuthenticationPage.jsx"
 import React from "react"
 import { Navigate, Route, Routes } from "react-router-dom"
@@ -23,6 +24,7 @@ export default function PetRoutes() {
                 <Route index element={<Navigate to="/transaction" replace />} />
                 <Route path="home" element={<HomePage />} />
                 <Route path="transaction" element={<TransactionPage />} />
+                <Route path="category" element={<CategoryPage />} />
                 <Route path="profile" element={<Profile />} />
                 <Route path="*" element={<Navigate to="/transaction" replace />} />
             </Route>

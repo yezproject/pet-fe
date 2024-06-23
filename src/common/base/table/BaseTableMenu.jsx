@@ -7,7 +7,7 @@ import Menu from "@mui/joy/Menu"
 import MenuItem from "@mui/joy/MenuItem"
 import Divider from "@mui/joy/Divider"
 
-export default function BaseMoreOption({ menuItems, divider }) {
+export default function BaseTableMenu({ menuItems, divider = [] }) {
     return (
         <Dropdown>
             <MenuButton

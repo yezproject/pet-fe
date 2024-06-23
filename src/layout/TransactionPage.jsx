@@ -2,13 +2,13 @@ import Box from "@mui/joy/Box"
 import Button from "@mui/joy/Button"
 import Typography from "@mui/joy/Typography"
 
-import BaseMoreOption from "@/common/base/BaseMoreOption.jsx"
+import BaseTableMenu from "@/common/base/table/BaseTableMenu.jsx"
 import BaseModal from "@/common/base/modal/BaseModal.jsx"
 import AddTransactionForm from "@/components/transaction/AddTransactionForm.jsx"
 import ModifyTransactionForm from "@/components/transaction/ModifyTransactionForm.jsx"
 import TransactionFilter from "@/components/transaction/TransactionFilter.jsx"
 import TransactionList from "@/components/transaction/TransactionList.jsx"
-import { addTransaction, deleteTransactions, getTransactions, updateTransaction } from "@/services/join-service.js"
+import transactionService from "@/services/transaction-service.js"
 import { AddBox } from "@mui/icons-material"
 import { useCallback, useEffect, useState } from "react"
 
@@ -18,17 +18,16 @@ export default function TransactionPage() {
     const [openModifyModal, setOpenModifyModal] = useState(false)
     const [selectedTransaction, setSelectedTransaction] = useState({})
 
-    const menuItems = useCallback((row) => [
-        { label: "Edit", action: () => handleEdit(row) },
-        { label: "Delete", action: () => handleDelete(row.id) },
-    ], [])
-
-    const transactionAction = useCallback((id) => {
-        return <BaseMoreOption menuItems={menuItems(id)} divider={["Move"]} />
+    const transactionAction = useCallback((row) => {
+        return <BaseTableMenu
+            menuItems={[
+                { label: "Update", action: () => onClickUpdate(row) },
+                { label: "Delete", action: () => onClickDelete(row.id) },
+            ]}/>
     }, [])
 
     const fetchTransactions = () => {
-        getTransactions().then((response) => {
+        transactionService.getTransactions().then((response) => {
             setTransactions(response.data)
         })
     }
@@ -38,7 +37,7 @@ export default function TransactionPage() {
     }, [])
 
     const onAddTransaction = async (newTransaction) => {
-        const { status } = await addTransaction(newTransaction)
+        const { status } = await transactionService.addTransaction(newTransaction)
         if (status === 201) {
             fetchTransactions()
             setOpenAddModal(false)
@@ -46,21 +45,21 @@ export default function TransactionPage() {
     }
 
     const onModifyTransaction = async (modifiedTransaction) => {
-        const { status } = await updateTransaction(modifiedTransaction.id, modifiedTransaction)
+        const { status } = await transactionService.updateTransaction(modifiedTransaction.id, modifiedTransaction)
         if (status === 204) {
             fetchTransactions()
             setOpenModifyModal(false)
         }
     }
 
-    const handleDelete = async (itemId) => {
-        const { status } = await deleteTransactions([itemId])
+    const onClickDelete = async (itemId) => {
+        const { status } = await transactionService.deleteTransactions([itemId])
         if (status === 204) {
             setTransactions(transactions => transactions.filter(it => it.id !== itemId))
         }
     }
 
-    const handleEdit = async (transaction) => {
+    const onClickUpdate = async (transaction) => {
         setSelectedTransaction(transaction)
         setOpenModifyModal(true)
     }

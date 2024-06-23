@@ -10,7 +10,7 @@ const TextInput = ({ control, name, label }) => {
     return (
         <>
             <FormLabel sx={{ mb: 1 }}>{label}</FormLabel>
-            <Input type="text" {...field} />
+            <Input type="text" {...field}/>
         </>
     )
 }
