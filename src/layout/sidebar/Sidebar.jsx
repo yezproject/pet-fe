@@ -30,9 +30,8 @@ import { useAuth } from "@/common/auth/use-auth.jsx"
 import BaseDarkMod from "@/common/base/BaseDarkMod.jsx"
 import { closeSidebar } from "@/contains/logic-sidebar.js"
 import { CategoryRounded } from "@mui/icons-material"
-import Link from "@mui/joy/Link"
 import { Fragment, useEffect, useState } from "react"
-import { Link as RouterLink, useNavigate } from "react-router-dom"
+import { useLocation, useNavigate } from "react-router-dom"
 
 
 function Toggle({ defaultExpanded = false, renderToggle, children }) {
@@ -57,12 +56,21 @@ function Toggle({ defaultExpanded = false, renderToggle, children }) {
 }
 
 export default function Sidebar({ onChangeMenu }) {
+    const location = useLocation()
     const navigate = useNavigate()
-    const [selectedMenu, setSelectedMenu] = useState("transaction")
+    const [selectedMenu, setSelectedMenu] = useState("")
     const { logout } = useAuth()
 
+    const navigateTo = (pathName) => {
+        navigate(`/${pathName}`)
+        setSelectedMenu(pathName)
+    }
+
     useEffect(() => {
-        navigate(`/${selectedMenu}`)
+        setSelectedMenu(location?.pathname?.split("/")[1])
+    }, [location])
+
+    useEffect(() => {
         onChangeMenu(selectedMenu)
     }, [selectedMenu])
 
@@ -151,7 +159,7 @@ export default function Sidebar({ onChangeMenu }) {
                     }}
                 >
                     <ListItem>
-                        <ListItemButton selected={selectedMenu === "home"} onClick={() => setSelectedMenu("home")}>
+                        <ListItemButton selected={selectedMenu === "home"} onClick={() => navigateTo("home")}>
                             <HomeRoundedIcon />
                             <ListItemContent>
                                 <Typography level="title-sm">Home</Typography>
@@ -160,7 +168,7 @@ export default function Sidebar({ onChangeMenu }) {
                     </ListItem>
 
                     <ListItem>
-                        <ListItemButton selected={selectedMenu === "transaction"} onClick={() => setSelectedMenu("transaction")}>
+                        <ListItemButton selected={selectedMenu === "transaction"} onClick={() => navigateTo("transaction")}>
                             <ShoppingCartRoundedIcon />
                             <ListItemContent>
                                 <Typography level="title-sm">Transaction</Typography>
@@ -169,7 +177,7 @@ export default function Sidebar({ onChangeMenu }) {
                     </ListItem>
 
                     <ListItem>
-                        <ListItemButton selected={selectedMenu === "category"} onClick={() => setSelectedMenu("category")}>
+                        <ListItemButton selected={selectedMenu === "category"} onClick={() => navigateTo("category")}>
                             <CategoryRounded />
                             <ListItemContent>
                                 <Typography level="title-sm">Category</Typography>
@@ -178,7 +186,7 @@ export default function Sidebar({ onChangeMenu }) {
                     </ListItem>
 
                     <ListItem>
-                        <ListItemButton selected={selectedMenu === "report"} onClick={() => setSelectedMenu("report")}>
+                        <ListItemButton selected={selectedMenu === "report"} onClick={() => navigateTo("report")}>
                             <DashboardRoundedIcon />
                             <ListItemContent>
                                 <Typography level="title-sm">Report</Typography>
