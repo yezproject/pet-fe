@@ -4,16 +4,25 @@ import { millisToDate } from "@/common/utils/time-utils.js"
 import Box from "@mui/joy/Box"
 import Typography from "@mui/joy/Typography"
 import PropTypes from "prop-types"
-import { memo } from "react"
+import { memo, useEffect, useState } from "react"
 
-export default memo(TransactionList)
+const TransactionList = memo(({ transactions, categories, menu }) => {
+    const [categoryMap, setCategoryMap] = useState(null)
+    
+    useEffect(() => {
+        if (categories && categories.length > 0) {
+            const map = new Map()
+            for (const category of categories) {
+                map.set(category.id, category)
+            }
+            setCategoryMap(map)
+        }
+    }, [categories])
 
-function TransactionList({ transactions, menu }) {
     const style = {
         overflow: "hidden",
         textOverflow: "ellipsis",
         whiteSpace: "nowrap",
-        
     }
 
     const columns = [
@@ -39,7 +48,7 @@ function TransactionList({ transactions, menu }) {
                 <Typography style={style}
                     level="body-xs"
                     title={row.categoryId}>
-                    {row.categoryId}
+                    {categoryMap ? categoryMap.get(row.categoryId)?.name : row.categoryId}
                 </Typography>
             )
         },
@@ -69,8 +78,6 @@ function TransactionList({ transactions, menu }) {
             />
         </>
     )
-}
+})
 
-TransactionList.propTypes = {
-    transactions: PropTypes.array.isRequired
-}
+export default TransactionList

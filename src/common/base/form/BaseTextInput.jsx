@@ -10,7 +10,16 @@ const BaseTextInput = ({ control, name, label }) => {
     return (
         <>
             <FormLabel sx={{ mb: 1 }}>{label}</FormLabel>
-            <Input type="text" {...field}/>
+            <Input type="text"
+                onChange={field.onChange}
+                onBlur={field.onBlur}
+                name={field.name}
+                value={field.value}
+                slotProps={{
+                    input: {
+                        ref: field.ref
+                    },
+                }} />
         </>
     )
 }

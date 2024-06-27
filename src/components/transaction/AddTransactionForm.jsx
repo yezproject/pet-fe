@@ -1,24 +1,21 @@
-import Autocomplete from "@mui/joy/Autocomplete"
-import AutocompleteOption from "@mui/joy/AutocompleteOption"
 import Box from "@mui/joy/Box"
 import Button from "@mui/joy/Button"
 import Grid from "@mui/joy/Grid"
 import Stack from "@mui/joy/Stack"
-import FormLabel from "@mui/joy/FormLabel"
 
 import BaseAmountMoneyInput from "@/common/base/form/BaseAmountMoneyInput"
+import { BaseAutocomplete } from "@/common/base/form/BaseAutocomplete"
 import BaseDateInput from "@/common/base/form/BaseDateInput"
 import BaseTextInput from "@/common/base/form/BaseTextInput.jsx"
 import BaseTimeInput from "@/common/base/form/BaseTimeInput"
 import { currentDateString, currentTimeString, dateToMillis } from "@/common/utils/time-utils.js"
-import useCategoryState from "@/state/use-category"
-import { useForm } from "react-hook-form"
-import { useEffect } from "react"
 import categoryService from "@/services/category-service"
-import { BaseAutocomplete } from "@/common/base/form/BaseAutocomplete"
+import { useEffect, useState } from "react"
+import { useForm } from "react-hook-form"
 
 export default function AddTransactionForm({ addTransaction }) {
-    const { handleSubmit, control } = useForm({
+    const [categories, setCategories] = useState([])
+    const { handleSubmit, control, setFocus } = useForm({
         defaultValues: {
             name: "",
             amount: "",
@@ -27,13 +24,20 @@ export default function AddTransactionForm({ addTransaction }) {
             time: currentTimeString()
         }
     })
-    const categories = useCategoryState((state) => state.categories)
+
+    const fetchCategories = () => {
+        categoryService.getCategories().then((res) => {
+            setCategories(res.data)
+        })
+    }
 
     useEffect(() => {
-        if (!categories || categories.length === 0) {
-            categoryService.getCategories()
-        }
+        fetchCategories()
     }, [])
+
+    useEffect(() => {
+        setFocus("name")
+    }, [setFocus])
 
     const onSubmit = (data) => {
         const transactionDate = `${data?.date}T${data?.time}`
@@ -46,8 +50,15 @@ export default function AddTransactionForm({ addTransaction }) {
         addTransaction(transaction)
     }
 
+    const preventEnter = (event) => {
+        if (event.key === "Enter") {
+            handleSubmit(onSubmit)()
+            event.preventDefault()
+        }
+    }
+
     return (
-        <form onSubmit={handleSubmit(onSubmit)}>
+        <form onSubmit={handleSubmit(onSubmit)} onKeyDown={preventEnter}>
             <Box>
                 <BaseTextInput
                     control={control}

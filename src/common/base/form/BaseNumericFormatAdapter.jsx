@@ -3,7 +3,7 @@ import { forwardRef } from "react"
 import { NumericFormat } from "react-number-format"
 
 const BaseNumericFormatAdapter = forwardRef(
-    function BaseNumericFormatAdapter(props, ref) {
+    (props, ref) => {
         const { onChange, ...other } = props
 
         return (

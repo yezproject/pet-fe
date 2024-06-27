@@ -9,21 +9,28 @@ import ModifyTransactionForm from "@/components/transaction/ModifyTransactionFor
 import TransactionFilter from "@/components/transaction/TransactionFilter.jsx"
 import TransactionList from "@/components/transaction/TransactionList.jsx"
 import transactionService from "@/services/transaction-service.js"
+import categoryService from "@/services/category-service.js"
 import { AddBox } from "@mui/icons-material"
 import { useCallback, useEffect, useState } from "react"
 
 export default function TransactionPage() {
     const [transactions, setTransactions] = useState([])
+    const [categories, setCategories] = useState(null)
     const [openAddModal, setOpenAddModal] = useState(false)
     const [openModifyModal, setOpenModifyModal] = useState(false)
     const [selectedTransaction, setSelectedTransaction] = useState({})
+
+    useEffect(() => {
+        fetchTransactions()
+        fetchCategories()
+    }, [])
 
     const transactionAction = useCallback((row) => {
         return <BaseTableMenu
             menuItems={[
                 { label: "Update", action: () => onClickUpdate(row) },
                 { label: "Delete", action: () => onClickDelete(row.id) },
-            ]}/>
+            ]} />
     }, [])
 
     const fetchTransactions = () => {
@@ -32,9 +39,11 @@ export default function TransactionPage() {
         })
     }
 
-    useEffect(() => {
-        fetchTransactions()
-    }, [])
+    const fetchCategories = () => {
+        categoryService.getCategories().then((res) => {
+            setCategories(res.data)
+        })
+    }
 
     const onAddTransaction = async (newTransaction) => {
         const { status } = await transactionService.addTransaction(newTransaction)
@@ -87,6 +96,7 @@ export default function TransactionPage() {
             <TransactionFilter />
             <TransactionList
                 transactions={transactions}
+                categories={categories}
                 menu={transactionAction}
             />
             <BaseModal
