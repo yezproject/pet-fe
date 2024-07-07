@@ -1,4 +1,4 @@
-import BrightnessAutoRoundedIcon from "@mui/icons-material/BrightnessAutoRounded"
+import BrightnessAutoRoundedIcon from "@mui/icons-material/Paid"
 import CloseRoundedIcon from "@mui/icons-material/CloseRounded"
 import DashboardRoundedIcon from "@mui/icons-material/DashboardRounded"
 import GroupRoundedIcon from "@mui/icons-material/GroupRounded"
@@ -130,14 +130,14 @@ export default function Sidebar({ onChangeMenu }) {
                 }}
                 onClick={() => closeSidebar()}
             />
-            <Box sx={{ display: "flex", gap: 1, alignItems: "center" }}>
+            <Box sx={{ display: "flex", gap: 1, alignItems: "center", mb: 5 }}>
                 <IconButton variant="soft" color="primary" size="sm">
                     <BrightnessAutoRoundedIcon />
                 </IconButton>
-                <Typography level="title-lg">Acme Co.</Typography>
+                <Typography level="title-lg">Ez Money</Typography>
                 <BaseDarkMod sx={{ ml: "auto" }} />
             </Box>
-            <Input size="sm" startDecorator={<SearchRoundedIcon />} placeholder="Search" />
+            {/* <Input size="sm" startDecorator={<SearchRoundedIcon />} placeholder="Search" /> */}
             <Box
                 sx={{
                     minHeight: 0,
@@ -158,14 +158,14 @@ export default function Sidebar({ onChangeMenu }) {
                         "--ListItem-radius": (theme) => theme.vars.radius.sm,
                     }}
                 >
-                    <ListItem>
+                    {/* <ListItem>
                         <ListItemButton selected={selectedMenu === "home"} onClick={() => navigateTo("home")}>
                             <HomeRoundedIcon />
                             <ListItemContent>
                                 <Typography level="title-sm">Home</Typography>
                             </ListItemContent>
                         </ListItemButton>
-                    </ListItem>
+                    </ListItem> */}
 
                     <ListItem>
                         <ListItemButton selected={selectedMenu === "transaction"} onClick={() => navigateTo("transaction")}>
@@ -246,7 +246,7 @@ export default function Sidebar({ onChangeMenu }) {
                         </ListItemButton>
                     </ListItem>
                 </List>
-                <Card invertedColors variant="soft" color="warning" size="sm" sx={{ boxShadow: "none" }}>
+                {/* <Card invertedColors variant="soft" color="warning" size="sm" sx={{ boxShadow: "none" }}>
                     <Stack direction="row" justifyContent="space-between" alignItems="center">
                         <Typography level="title-sm">Used space</Typography>
                         <IconButton size="sm">
@@ -258,7 +258,7 @@ export default function Sidebar({ onChangeMenu }) {
                     <Button size="sm" variant="solid">
                         Upgrade plan
                     </Button>
-                </Card>
+                </Card> */}
             </Box>
             <Divider />
             <Box sx={{ display: "flex", gap: 1, alignItems: "center" }}>
@@ -268,8 +268,8 @@ export default function Sidebar({ onChangeMenu }) {
                     src="https://images.unsplash.com/photo-1535713875002-d1d0cf377fde?auto=format&fit=crop&w=286"
                 />
                 <Box sx={{ minWidth: 0, flex: 1 }}>
-                    <Typography level="title-sm">Siriwat K.</Typography>
-                    <Typography level="body-xs">siriwatk@test.com</Typography>
+                    <Typography level="title-sm">Phan Dung</Typography>
+                    <Typography level="body-xs">dung@mail.com</Typography>
                 </Box>
                 <IconButton size="sm" variant="plain" color="neutral" onClick={() => onClickLogout()}>
                     <LogoutRoundedIcon />
