@@ -1,18 +1,17 @@
+
 import Checkbox from "@mui/joy/Checkbox"
 import Sheet from "@mui/joy/Sheet"
 import Table from "@mui/joy/Table"
 import { useState } from "react"
 import BaseTableCell from "./BaseTableCell.jsx"
-
 export default function BaseTable({ columns, rows, rowKey, checkboxSelection = false }) {
     const [selected, setSelected] = useState([])
 
     return (
         <>
-            <Sheet className="OrderTableContainer"
+            <Sheet
                 variant="outlined"
                 sx={{
-                    display: { xs: "none", sm: "initial" },
                     width: "100%",
                     borderRadius: "sm",
                     flexShrink: 1,
@@ -79,6 +78,7 @@ export default function BaseTable({ columns, rows, rowKey, checkboxSelection = f
                     </tbody>
                 </Table>
             </Sheet>
+
         </>
     )
 }

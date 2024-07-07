@@ -2,14 +2,14 @@ import Box from "@mui/joy/Box"
 import Button from "@mui/joy/Button"
 import Typography from "@mui/joy/Typography"
 
-import BaseTableMenu from "@/common/base/table/BaseTableMenu.jsx"
 import BaseModal from "@/common/base/modal/BaseModal.jsx"
+import BaseTableMenu from "@/common/base/table/BaseTableMenu.jsx"
 import AddTransactionForm from "@/components/transaction/AddTransactionForm.jsx"
 import ModifyTransactionForm from "@/components/transaction/ModifyTransactionForm.jsx"
 import TransactionFilter from "@/components/transaction/TransactionFilter.jsx"
 import TransactionList from "@/components/transaction/TransactionList.jsx"
-import transactionService from "@/services/transaction-service.js"
 import categoryService from "@/services/category-service.js"
+import transactionService from "@/services/transaction-service.js"
 import { AddBox } from "@mui/icons-material"
 import { useCallback, useEffect, useState } from "react"
 
@@ -19,11 +19,18 @@ export default function TransactionPage() {
     const [openAddModal, setOpenAddModal] = useState(false)
     const [openModifyModal, setOpenModifyModal] = useState(false)
     const [selectedTransaction, setSelectedTransaction] = useState({})
+    const [currentPage, setCurrentPage] = useState(1)
+    const [totalPages, setTotalPages] = useState(null)
+    const pageSize = 20
 
     useEffect(() => {
         fetchTransactions()
         fetchCategories()
     }, [])
+
+    useEffect(() => {
+        fetchTransactions(currentPage)
+    }, [currentPage])
 
     const transactionAction = useCallback((row) => {
         return <BaseTableMenu
@@ -34,8 +41,9 @@ export default function TransactionPage() {
     }, [])
 
     const fetchTransactions = () => {
-        transactionService.getTransactions().then((response) => {
-            setTransactions(response.data)
+        transactionService.getTransactionsPage(currentPage - 1, pageSize).then((response) => {
+            setTransactions(response?.data?.content)
+            setTotalPages(response?.data?.totalPages)
         })
     }
 
@@ -64,13 +72,17 @@ export default function TransactionPage() {
     const onClickDelete = async (itemId) => {
         const { status } = await transactionService.deleteTransactions([itemId])
         if (status === 204) {
-            setTransactions(transactions => transactions.filter(it => it.id !== itemId))
+            fetchTransactions()
         }
     }
 
     const onClickUpdate = async (transaction) => {
         setSelectedTransaction(transaction)
         setOpenModifyModal(true)
+    }
+
+    const onChangePage = (page) => {
+        setCurrentPage(page)
     }
 
     return (
@@ -98,6 +110,9 @@ export default function TransactionPage() {
                 transactions={transactions}
                 categories={categories}
                 menu={transactionAction}
+                onChangePage={onChangePage}
+                currentPage={currentPage}
+                totalPage={totalPages}
             />
             <BaseModal
                 open={openAddModal}

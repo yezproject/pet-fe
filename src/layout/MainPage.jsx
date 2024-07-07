@@ -19,9 +19,8 @@ export default function MainPage() {
         <CssVarsProvider disableTransitionOnChange>
             <CssBaseline />
             <Box sx={{ display: "flex", minHeight: "100dvh" }}>
-                <Header />
                 <Sidebar onChangeMenu={updateMenu} />
-
+                <Header />
                 <Box
                     component="main"
                     className="MainContent"
@@ -39,6 +38,7 @@ export default function MainPage() {
                         minWidth: 0,
                         height: "100dvh",
                         gap: 1,
+                        overflow: "auto"
                     }}
                 >
                     <Box sx={{ display: "flex", alignItems: "center" }}>

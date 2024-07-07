@@ -4,6 +4,14 @@ function getTransactions() {
     return HTTP.get("transactions")
 }
 
+function getTransactionsPage(page, size) {
+    return HTTP.get("transactions", {
+        params: {
+            page, size
+        }
+    })
+}
+
 function getTransactionById(transactionId) {
     return HTTP.get(`transactions/${transactionId}`)
 }
@@ -22,6 +30,7 @@ function deleteTransactions(params) {
 
 export default class TransactionService {
     static getTransactions = getTransactions
+    static getTransactionsPage = getTransactionsPage
     static addTransaction = addTransaction
     static updateTransaction = updateTransaction
     static deleteTransactions = deleteTransactions

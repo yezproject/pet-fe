@@ -3,7 +3,6 @@ import { Box, Typography } from "@mui/joy"
 import Chart from "react-apexcharts"
 
 export default function Home() {
-    console.log("already load home")
     const state = {
         options: {},
         series: [

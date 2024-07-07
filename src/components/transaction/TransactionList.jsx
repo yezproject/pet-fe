@@ -1,14 +1,14 @@
+import BasePagination from "@/common/base/table/BasePagination"
 import BaseTable from "@/common/base/table/BaseTable"
 import { thousandsNumber } from "@/common/constants/convert-number.js"
 import { millisToDate } from "@/common/utils/time-utils.js"
 import Box from "@mui/joy/Box"
 import Typography from "@mui/joy/Typography"
-import PropTypes from "prop-types"
 import { memo, useEffect, useState } from "react"
 
-const TransactionList = memo(({ transactions, categories, menu }) => {
+const TransactionList = memo(({ transactions, categories, menu, onChangePage, currentPage, totalPage }) => {
     const [categoryMap, setCategoryMap] = useState(null)
-    
+
     useEffect(() => {
         if (categories && categories.length > 0) {
             const map = new Map()
@@ -18,6 +18,22 @@ const TransactionList = memo(({ transactions, categories, menu }) => {
             setCategoryMap(map)
         }
     }, [categories])
+
+    const onClickPage = (page) => {
+        onChangePage(page)
+    }
+
+    const onClickNext = () => {
+        if (totalPage > currentPage) {
+            onChangePage(Number(currentPage) + 1)
+        }
+    }
+
+    const onClickPrevious = () => {
+        if (currentPage > 1) {
+            onChangePage(Number(currentPage) - 1)
+        }
+    }
 
     const style = {
         overflow: "hidden",
@@ -75,6 +91,13 @@ const TransactionList = memo(({ transactions, categories, menu }) => {
                 rows={transactions}
                 rowKey="id"
                 checkboxSelection={true}
+            />
+            <BasePagination
+                count={totalPage}
+                current={currentPage}
+                onClickPage={onClickPage}
+                onClickNext={onClickNext}
+                onClickPrevious={onClickPrevious}
             />
         </>
     )
