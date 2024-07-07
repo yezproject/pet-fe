@@ -1,11 +1,10 @@
-import MainBreadcrumbs from "@/components/MainBreadcrumbs"
-import Header from "@/layout/header/Header.jsx"
 import Sidebar from "@/layout/sidebar/Sidebar.jsx"
 import Box from "@mui/joy/Box"
 import CssBaseline from "@mui/joy/CssBaseline"
+import Stack from "@mui/joy/Stack"
 import { CssVarsProvider } from "@mui/joy/styles"
-import { Outlet } from "react-router-dom"
 import { useState } from "react"
+import { Outlet } from "react-router-dom"
 
 export default function MainPage() {
     const [menu, setMenu] = useState("Transaction")
@@ -20,7 +19,6 @@ export default function MainPage() {
             <CssBaseline />
             <Box sx={{ display: "flex", minHeight: "100dvh" }}>
                 <Sidebar onChangeMenu={updateMenu} />
-                <Header />
                 <Box
                     component="main"
                     className="MainContent"
@@ -38,13 +36,16 @@ export default function MainPage() {
                         minWidth: 0,
                         height: "100dvh",
                         gap: 1,
-                        overflow: "auto"
                     }}
                 >
-                    <Box sx={{ display: "flex", alignItems: "center" }}>
-                        <MainBreadcrumbs breadcrumbTexts={[menu]}></MainBreadcrumbs>
-                    </Box>
-                    <Outlet />
+                    <Stack
+                        className="MainPage"
+                        sx={{
+                            height: "100%"
+                        }}
+                    >
+                        <Outlet />
+                    </Stack>
                 </Box>
             </Box>
         </CssVarsProvider>

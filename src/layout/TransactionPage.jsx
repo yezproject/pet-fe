@@ -86,7 +86,7 @@ export default function TransactionPage() {
     }
 
     return (
-        <Box>
+        <>
             <Box
                 sx={{
                     display: "flex",
@@ -135,6 +135,6 @@ export default function TransactionPage() {
                 title={"Update transaction"}
                 onClose={() => setOpenModifyModal(false)}
             />
-        </Box>
+        </>
     )
 }
