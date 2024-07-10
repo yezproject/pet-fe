@@ -1,5 +1,5 @@
 import HTTP from "@/services/base-api-service.js"
-import categoryStore from "@/state/category-storage.js"
+import { useCategoryStore } from "@/state/category-store.js"
 
 function getCategories() {
     return HTTP.get("categories")
@@ -24,8 +24,8 @@ function deleteCategory(categoryId) {
 const categoryService = {
     getCategories: async () => {
         const res = await getCategories()
-        if(res?.data) {
-            categoryStore.getState().setCategories(res.data)
+        if (res?.data) {
+            useCategoryStore.getState().setCategories(res.data)
         }
         return res
     },

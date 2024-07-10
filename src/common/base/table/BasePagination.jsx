@@ -13,10 +13,9 @@ export default function BasePagination({ count, current, onClickPage, onClickNex
         const pageContent = calculatePageContents(current, count).map(content => (
             {
                 content: `${content}`,
-                isActive: content == current
+                isActive: content == current,
             }
         ))
-        console.log(pageContent)
 
         setPages(pageContent)
     }, [count, current])
@@ -42,22 +41,22 @@ export default function BasePagination({ count, current, onClickPage, onClickNex
     }
 
     const strategyStyle = (page) => {
-        if(!Number(page?.content)) {
+        if (!Number(page?.content)) {
             return {
                 variant: "plain",
-                disabled: true
+                disabled: true,
             }
         }
-        
-        if(page?.isActive) {
+
+        if (page?.isActive) {
             return {
                 variant: "solid",
-                disabled: true
+                disabled: true,
             }
         } else {
             return {
                 variant: "outlined",
-                disabled: false
+                disabled: false,
             }
         }
 
@@ -71,7 +70,7 @@ export default function BasePagination({ count, current, onClickPage, onClickNex
                     pt: 2,
                     gap: 1,
                     [`& .${iconButtonClasses.root}`]: { borderRadius: "50%" },
-                    display: "flex"
+                    display: "flex",
                 }}
             >
                 <Button

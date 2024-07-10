@@ -1,14 +1,16 @@
+import Typography from "@mui/joy/Typography"
+
 function DefaultCell({ pureValue }) {
     const style = {
         overflow: "hidden",
         textOverflow: "ellipsis",
         whiteSpace: "nowrap",
-        cursor: "pointer"
+        cursor: "pointer",
     }
     return (
         <Typography style={style}
-            level="body-xs"
-            title={pureValue}>
+                    level="body-xs"
+                    title={pureValue}>
             {pureValue}
         </Typography>
     )

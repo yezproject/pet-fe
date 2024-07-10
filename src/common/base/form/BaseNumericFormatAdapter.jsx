@@ -1,4 +1,3 @@
-import { PropTypes } from "prop-types"
 import { forwardRef } from "react"
 import { NumericFormat } from "react-number-format"
 
@@ -24,10 +23,5 @@ const BaseNumericFormatAdapter = forwardRef(
         )
     },
 )
-
-BaseNumericFormatAdapter.propTypes = {
-    name: PropTypes.string.isRequired,
-    onChange: PropTypes.func.isRequired,
-}
 
 export default BaseNumericFormatAdapter

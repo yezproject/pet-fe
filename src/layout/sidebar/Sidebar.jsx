@@ -1,29 +1,20 @@
 import BrightnessAutoRoundedIcon from "@mui/icons-material/Paid"
-import CloseRoundedIcon from "@mui/icons-material/CloseRounded"
-import DashboardRoundedIcon from "@mui/icons-material/DashboardRounded"
 import GroupRoundedIcon from "@mui/icons-material/GroupRounded"
-import HomeRoundedIcon from "@mui/icons-material/HomeRounded"
 import KeyboardArrowDownIcon from "@mui/icons-material/KeyboardArrowDown"
 import LogoutRoundedIcon from "@mui/icons-material/LogoutRounded"
-import SearchRoundedIcon from "@mui/icons-material/SearchRounded"
 import SettingsRoundedIcon from "@mui/icons-material/SettingsRounded"
 import ShoppingCartRoundedIcon from "@mui/icons-material/ShoppingCartRounded"
 import SupportRoundedIcon from "@mui/icons-material/SupportRounded"
 import Avatar from "@mui/joy/Avatar"
 import Box from "@mui/joy/Box"
-import Button from "@mui/joy/Button"
-import Card from "@mui/joy/Card"
 import Divider from "@mui/joy/Divider"
 import GlobalStyles from "@mui/joy/GlobalStyles"
 import IconButton from "@mui/joy/IconButton"
-import Input from "@mui/joy/Input"
-import LinearProgress from "@mui/joy/LinearProgress"
 import List from "@mui/joy/List"
 import ListItem from "@mui/joy/ListItem"
 import ListItemButton, { listItemButtonClasses } from "@mui/joy/ListItemButton"
 import ListItemContent from "@mui/joy/ListItemContent"
 import Sheet from "@mui/joy/Sheet"
-import Stack from "@mui/joy/Stack"
 import Typography from "@mui/joy/Typography"
 
 import { useAuth } from "@/common/auth/use-auth.jsx"
@@ -32,6 +23,8 @@ import { closeSidebar } from "@/contains/logic-sidebar.js"
 import { CategoryRounded } from "@mui/icons-material"
 import { Fragment, useEffect, useState } from "react"
 import { useLocation, useNavigate } from "react-router-dom"
+import { useUserStore } from "@/state/user-store.js"
+import { getToken } from "@/common/storage/local-storage.js"
 
 
 function Toggle({ defaultExpanded = false, renderToggle, children }) {
@@ -65,6 +58,19 @@ export default function Sidebar({ onChangeMenu }) {
         navigate(`/${pathName}`)
         setSelectedMenu(pathName)
     }
+
+    const fullName = useUserStore((state) => state.fullName)
+    const email = useUserStore((state) => state.email)
+    const setFullName = useUserStore((state) => state.setFullName)
+    const setEmail = useUserStore((state) => state.setEmail)
+
+    useEffect(() => {
+        const token = getToken()
+        const payloadBody = token.split(".")[1]
+        const userInfo = JSON.parse(atob(payloadBody))
+        setEmail(userInfo?.sub || "")
+        setFullName(userInfo?.name || "")
+    }, [])
 
     useEffect(() => {
         setSelectedMenu(location?.pathname?.split("/")[1])
@@ -168,7 +174,8 @@ export default function Sidebar({ onChangeMenu }) {
                     </ListItem> */}
 
                     <ListItem>
-                        <ListItemButton selected={selectedMenu === "transaction"} onClick={() => navigateTo("transaction")}>
+                        <ListItemButton selected={selectedMenu === "transaction"}
+                                        onClick={() => navigateTo("transaction")}>
                             <ShoppingCartRoundedIcon />
                             <ListItemContent>
                                 <Typography level="title-sm">Transaction</Typography>
@@ -268,8 +275,8 @@ export default function Sidebar({ onChangeMenu }) {
                     src="https://images.unsplash.com/photo-1535713875002-d1d0cf377fde?auto=format&fit=crop&w=286"
                 />
                 <Box sx={{ minWidth: 0, flex: 1 }}>
-                    <Typography level="title-sm">Phan Dung</Typography>
-                    <Typography level="body-xs">dung@mail.com</Typography>
+                    <Typography level="title-sm">{fullName}</Typography>
+                    <Typography level="body-xs">{email}</Typography>
                 </Box>
                 <IconButton size="sm" variant="plain" color="neutral" onClick={() => onClickLogout()}>
                     <LogoutRoundedIcon />

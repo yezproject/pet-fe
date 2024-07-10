@@ -6,8 +6,8 @@ const AuthContext = createContext()
 
 export const AuthProvider = ({ children }) => {
     const navigate = useNavigate()
-    const login = async (data) => {
-        setToken(data)
+    const login = async (token) => {
+        setToken(token)
         navigate("/", { replace: true })
     }
 

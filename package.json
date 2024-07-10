@@ -13,16 +13,13 @@
   "dependencies": {
     "@emotion/react": "^11.11.4",
     "@emotion/styled": "^11.11.5",
-    "@hookform/resolvers": "^3.3.2",
     "@mui/icons-material": "^5.15.17",
     "@mui/joy": "^5.0.0-beta.36",
     "@mui/material": "^5.15.17",
     "apexcharts": "^3.49.1",
     "axios": "^1.6.2",
-    "globals": "^15.4.0",
     "happy-dom": "^12.10.3",
     "jsesc": "^3.0.2",
-    "prop-types": "^15.8.1",
     "react": "^18.2.0",
     "react-apexcharts": "^1.4.1",
     "react-dom": "^18.2.0",
@@ -37,11 +34,7 @@
     "@testing-library/jest-dom": "^6.1.5",
     "@testing-library/react": "^14.1.2",
     "@types/react": "^18.2.37",
-    "@types/react-dom": "^18.2.15",
     "@vitejs/plugin-react": "^4.2.0",
-    "@vitest/coverage-v8": "^1.0.4",
-    "autoprefixer": "^10.4.16",
-    "postcss": "^8.4.32",
     "vite": "^5.0.0",
     "vitest": "^1.0.1"
   }

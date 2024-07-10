@@ -46,33 +46,33 @@ const TransactionList = memo(({ transactions, categories, menu, onChangePage, cu
             name: "Name",
             valueGetter: (row) => (
                 <Typography style={style}
-                    level="body-xs"
-                    title={row.name}>
+                            level="body-xs"
+                            title={row.name}>
                     {row.name}
                 </Typography>
-            )
+            ),
         },
         {
             name: "Transaction time",
             valueGetter: (row) => (
                 <Typography level="body-xs">{millisToDate(row.transactionDate)}</Typography>
-            )
+            ),
         },
         {
             name: "Category",
             valueGetter: (row) => (
                 <Typography style={style}
-                    level="body-xs"
-                    title={row.categoryId}>
+                            level="body-xs"
+                            title={row.categoryId}>
                     {categoryMap ? categoryMap.get(row.categoryId)?.name : row.categoryId}
                 </Typography>
-            )
+            ),
         },
         {
             name: "Amount",
             valueGetter: (row) => (
                 <Typography level="body-xs">{thousandsNumber(row.amount)}</Typography>
-            )
+            ),
         },
         {
             name: "Action",
@@ -80,8 +80,8 @@ const TransactionList = memo(({ transactions, categories, menu, onChangePage, cu
                 <Box sx={{ display: "flex", gap: 2, alignItems: "center" }}>
                     {menu(row)}
                 </Box>
-            )
-        }
+            ),
+        },
     ]
 
     return (
